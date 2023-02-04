@@ -1,0 +1,131 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI.Discover", "apps\lxi.discover\cc.isr.LXI.Discover.csproj", "{D59AEB5C-F064-440B-858E-FF0DCB4E076D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xdr", "xdr", "{ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lxi", "lxi", "{86C043E0-7881-4983-9ABB-F4E26483EE68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ieee488", "ieee488", "{8AB47AA3-C7B6-4AC3-902A-7358E9B7E24A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{4E793F65-6C68-43ED-8E2F-5C8BDD51A014}"
+	ProjectSection(SolutionItems) = preProject
+		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\lxi.md = ..\lxi.md
+		items\readme.md = items\readme.md
+		..\README.md = ..\README.md
+		items\version.build.bat = items\version.build.bat
+		items\version.build.props = items\version.build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rpc", "rpc", "{5C8F16A1-489F-4F32-8A23-17901903ED38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.XDR", "..\..\xdr\src\xdr\xdr\cc.isr.XDR.csproj", "{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.XDR.MSTest", "..\..\xdr\src\xdr\xdr.MSTest\cc.isr.XDR.MSTest.csproj", "{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{C9EC5D87-1B5B-42EB-BCB9-767B69A4DF9F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\xdr\CHANGELOG.md = ..\..\xdr\CHANGELOG.md
+		..\..\xdr\src\items\readme.md = ..\..\xdr\src\items\readme.md
+		..\..\xdr\README.md = ..\..\xdr\README.md
+		..\..\xdr\src\items\version.build.bat = ..\..\xdr\src\items\version.build.bat
+		..\..\xdr\src\items\version.build.props = ..\..\xdr\src\items\version.build.props
+		..\..\xdr\xdr.md = ..\..\xdr\xdr.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{2201DCC6-F504-427C-8BC9-420202A5506C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\oncrpc\CHANGELOG.md = ..\..\oncrpc\CHANGELOG.md
+		..\..\oncrpc\onc.rpc.md = ..\..\oncrpc\onc.rpc.md
+		..\..\oncrpc\src\items\readme.md = ..\..\oncrpc\src\items\readme.md
+		..\..\oncrpc\README.md = ..\..\oncrpc\README.md
+		..\..\oncrpc\src\items\version.build.bat = ..\..\oncrpc\src\items\version.build.bat
+		..\..\oncrpc\src\items\version.build.props = ..\..\oncrpc\src\items\version.build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.ONC.RPC", "..\..\oncrpc\src\rpc\oncrpc\cc.isr.ONC.RPC.csproj", "{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.ONC.RPC.MSTest", "..\..\oncrpc\src\rpc\oncrpc.mstest\cc.isr.ONC.RPC.MSTest.csproj", "{4CBC8197-3872-4C10-A022-33B8999A8768}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vxi", "vxi", "{469FBA75-18C0-4AF7-A21D-182BBAF038C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{9F383207-81EE-4C90-890C-76810B28F113}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\vxi\CHANGELOG.md = ..\..\vxi\CHANGELOG.md
+		..\..\vxi\src\items\readme.md = ..\..\vxi\src\items\readme.md
+		..\..\vxi\README.md = ..\..\vxi\README.md
+		..\..\vxi\src\items\version.build.bat = ..\..\vxi\src\items\version.build.bat
+		..\..\vxi\src\items\version.build.props = ..\..\vxi\src\items\version.build.props
+		..\..\vxi\vxi-11.md = ..\..\vxi\vxi-11.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11", "..\..\vxi\src\vxi\vxi\cc.isr.VXI11.csproj", "{32944FF4-2FE6-4378-ACA0-3161659A60DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.MSTest", "..\..\vxi\src\vxi\vxi.mstest\cc.isr.VXI11.MSTest.csproj", "{D6C272AF-0E11-47CB-98C5-143C7364FCC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.Visa.MSTest", "..\..\vxi\src\visa\visa.MSTest\cc.isr.VXI11.Visa.MSTest.csproj", "{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBC8197-3872-4C10-A022-33B8999A8768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBC8197-3872-4C10-A022-33B8999A8768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBC8197-3872-4C10-A022-33B8999A8768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBC8197-3872-4C10-A022-33B8999A8768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32944FF4-2FE6-4378-ACA0-3161659A60DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32944FF4-2FE6-4378-ACA0-3161659A60DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32944FF4-2FE6-4378-ACA0-3161659A60DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32944FF4-2FE6-4378-ACA0-3161659A60DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C272AF-0E11-47CB-98C5-143C7364FCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C272AF-0E11-47CB-98C5-143C7364FCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C272AF-0E11-47CB-98C5-143C7364FCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C272AF-0E11-47CB-98C5-143C7364FCC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D59AEB5C-F064-440B-858E-FF0DCB4E076D} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
+		{4E793F65-6C68-43ED-8E2F-5C8BDD51A014} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
+		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145} = {ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}
+		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB} = {ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}
+		{C9EC5D87-1B5B-42EB-BCB9-767B69A4DF9F} = {ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}
+		{2201DCC6-F504-427C-8BC9-420202A5506C} = {5C8F16A1-489F-4F32-8A23-17901903ED38}
+		{2C037802-2ABA-4C2D-89D9-D3CAD13DE1D0} = {5C8F16A1-489F-4F32-8A23-17901903ED38}
+		{4CBC8197-3872-4C10-A022-33B8999A8768} = {5C8F16A1-489F-4F32-8A23-17901903ED38}
+		{9F383207-81EE-4C90-890C-76810B28F113} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{32944FF4-2FE6-4378-ACA0-3161659A60DA} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{D6C272AF-0E11-47CB-98C5-143C7364FCC8} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{DBE4FB96-439B-4C07-BC65-4C8FAEB3128F} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {090D34DC-03CB-40F0-AB31-DE69AAAD7AA2}
+	EndGlobalSection
+EndGlobal
