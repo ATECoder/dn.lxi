@@ -1,17 +1,13 @@
-using System.Diagnostics.Metrics;
 using System.Net;
-using System.Numerics;
-using System.Security.Cryptography;
 using System.Text;
 
 using cc.isr.VXI11;
 using cc.isr.VXI11.Visa;
-using cc.isr.VXI11.IEEE488;
-using cc.isr.VXI11.Logging;
+using cc.isr.LXI.Logging;
 
 namespace cc.isr.LXI.Discover;
 
-/// <summary>   A lxi discover. </summary>
+/// <summary>   An LXI discover. </summary>
 /// <remarks>
 /// 2450 (152), 6510 (154) and 7510 (144) are on:  
 /// <code>
@@ -22,17 +18,17 @@ namespace cc.isr.LXI.Discover;
 /// 
 /// Discovering instruments on 192.168.4.255....
 /// 2023-02-04 12:39:58.012,ListCoreDevicesAddresses scanning 254 addresses at 192.168.4.255
-/// 2023-02-04 12:39:58.042,Checking for portmap service
-/// 2023-02-04 12:39:58.258,No portmap service available.
-/// 2023-02-04 12:39:58.258, Creating embedded portmap instance
-/// 2023-02-04 12:39:58.474, Portmap service started; checked 215.3 ms.
+/// 2023-02-04 12:39:58.042,Checking for Portmap service
+/// 2023-02-04 12:39:58.258,No Portmap service available.
+/// 2023-02-04 12:39:58.258,Creating embedded Portmap instance
+/// 2023-02-04 12:39:58.474,Portmap service started; checked 215.3 ms.
 /// Found 0 instruments on 192.168.4.255
 ///
 /// Discovering instruments on 192.168.0.255....
 /// 2023-02-04 12:40:08.138,ListCoreDevicesAddresses scanning 254 addresses at 192.168.0.255
-/// 2023-02-04 12:40:08.138,Checking for portmap service
-/// 2023-02-04 12:40:08.253,No portmap service available.
-/// 2023-02-04 12:40:08.253, Creating embedded portmap instance
+/// 2023-02-04 12:40:08.138,Checking for Portmap service
+/// 2023-02-04 12:40:08.253,No Portmap service available.
+/// 2023-02-04 12:40:08.253, Creating embedded Portmap instance
 /// 2023-02-04 12:40:08.469, Portmap service started; checked 115.1 ms.
 /// Found 3 instruments on 192.168.0.255
 ///
@@ -146,16 +142,16 @@ to discover all the instruments listening on the local IPs of this machine.
 
     public static string QueryInstrumet( string ipv4Address )
     {
-        using cc.isr.VXI11.IEEE488.Ieee488Instrument instrument = new();
+        using Vxi11Client instrument = new();
         instrument.ThreadExceptionOccurred += OnThreadExcetion;
         instrument.Connect( ipv4Address, DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily,0 ) );
-        return instrument.QueryLine( Ieee488Commands.IDNRead ).response;
+        return instrument.QueryLine( "*IDN?" ).response;
     }
 
     internal static void OnThreadExcetion( object sender, ThreadExceptionEventArgs e )
     {
         string name = "unknown";
-        if ( sender is Ieee488Instrument ) name = nameof( Ieee488Instrument );
+        if ( sender is Vxi11Client ) name = nameof( Vxi11Client );
         Logger.Writer.LogError( $"{name} encountered an exception during an asynchronous operation", e.Exception );
     }
 

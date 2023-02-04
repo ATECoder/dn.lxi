@@ -8,14 +8,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <RootNamespace>cc.isr.LXI.Discover</RootNamespace>
-    <AssemblyName>cc.isr.LXI.Discover</AssemblyName>
+    <RootNamespace>cc.isr.LXI.IEEE488.SingleClientServerTester</RootNamespace>
+    <AssemblyName>cc.isr.LXI.IEEE488.SingleClientServerTester</AssemblyName>
 
     <!-- Display name -->
-    <ApplicationTitle>cc.isr.LXI.Discover</ApplicationTitle>
+    <ApplicationTitle>cc.isr.LXI.IEEE488.SingleClientServerTester</ApplicationTitle>
 
     <!-- App Identifier -->
-    <ApplicationId>cc.isr.lxi.Discover</ApplicationId>
+    <ApplicationId>cc.isr.lxi.ieee488.SingleClientServerTester</ApplicationId>
 
   </PropertyGroup>
 
