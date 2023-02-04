@@ -1,4 +1,4 @@
-using cc.isr.VXI11.Logging;
+using cc.isr.LXI.Logging;
 using cc.isr.LXI.IEEE488;
 using cc.isr.LXI.IEEE488.EnumExtensions;
 using cc.isr.LXI.IEEE488.Mock;

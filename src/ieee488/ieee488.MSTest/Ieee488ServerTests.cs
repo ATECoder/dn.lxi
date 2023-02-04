@@ -1,6 +1,8 @@
 using System.ComponentModel;
 
-using cc.isr.VXI11.Logging;
+using cc.isr.VXI11.Visa;
+
+using cc.isr.LXI.Logging;
 using cc.isr.LXI.IEEE488.Mock;
 using cc.isr.ONC.RPC.Portmap;
 using cc.isr.ONC.RPC.Server;
@@ -150,7 +152,7 @@ public class Ieee488ServerTests
         string identity = Ieee488ServerTests._identity;
         string command = Ieee488Commands.IDNRead;
         ieee488Client.Connect( ipv4Address,
-                                Visa.DeviceAddress.BuildInterfaceDeviceString( Visa.DeviceAddress.GenericInterfaceFamily, 0 ) );
+                               DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily, 0 ) );
 
         int count = repeatCount;
         while ( repeatCount > 0 )

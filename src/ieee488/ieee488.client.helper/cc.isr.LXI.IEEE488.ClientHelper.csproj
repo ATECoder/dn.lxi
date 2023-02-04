@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>cc.isr.LXI.IEEE488.ClientHelper</RootNamespace>
+    <AssemblyName>cc.isr.LXI.IEEE488.ClientHelper</AssemblyName>
+
+
+    <!-- Display name -->
+    <ApplicationTitle>cc.isr.LXI.IEEE488.ClientHelper</ApplicationTitle>
+
+    <!-- App Identifier -->
+    <ApplicationId>cc.isr.lxi.ieee488.clienthelper</ApplicationId>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\lxi\cc.isr.LXI\cc.isr.LXI.csproj" />
+  </ItemGroup>
+
+</Project>

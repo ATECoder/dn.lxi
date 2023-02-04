@@ -1,4 +1,4 @@
-using cc.isr.VXI11.Logging;
+using cc.isr.LXI.Logging;
 namespace cc.isr.LXI.IEEE488.MSTest;
 
 /// <summary>   (Unit Test Class) an ieee 488 client tests. </summary>
