@@ -73,7 +73,7 @@ public static class IEEE488InstrumentTestInfo
         QueryInfo = $"{instrument} Delays: Read: {readAfterWriteDelay.TotalMilliseconds:0.0} ms; Write: {interQueryDelayMs}ms";
 
         System.Text.StringBuilder builder = new();
-        using var lxiClient = new isr.LXI.IEEE488.Ieee488Client();
+        using var lxiClient = new Vxi11Client();
 
         lxiClient.Connect( ipv4Address, "inst0" );
 
@@ -116,7 +116,7 @@ public static class IEEE488InstrumentTestInfo
         QueryInfo = $"{instrument} Delays: Read: {readAfterWriteDelay.TotalMilliseconds:0.0} ms; Write: {interQueryDelayMs}ms";
 
         System.Text.StringBuilder builder = new();
-        using var lxiClient = new isr.LXI.IEEE488.Ieee488Client();
+        using var lxiClient = new Vxi11Client();
 
         lxiClient.Connect( ipv4Address, "inst0" );
 
@@ -139,7 +139,7 @@ public static class IEEE488InstrumentTestInfo
     /// <param name="command">      The command. </param>
     /// <param name="trimEnd">      True to trim end. </param>
     /// <returns>   The device. </returns>
-    private static string QueryDevice( isr.LXI.IEEE488.Ieee488Client lxiClient, string command, bool trimEnd )
+    private static string QueryDevice( Vxi11Client lxiClient, string command, bool trimEnd )
     {
         try
         {
@@ -157,7 +157,7 @@ public static class IEEE488InstrumentTestInfo
     /// <param name="lxiClient">  The VXI-11 client. </param>
     /// <param name="command">      The command. </param>
     /// <returns>   A string. </returns>
-    private static string WriteDevice( isr.LXI.IEEE488.Ieee488Client lxiClient, string command )
+    private static string WriteDevice( Vxi11Client lxiClient, string command )
     {
         try
         {

@@ -1,9 +1,11 @@
 using cc.isr.LXI.Logging;
+using cc.isr.VXI11;
+
 namespace cc.isr.LXI.IEEE488.MSTest;
 
-/// <summary>   (Unit Test Class) an ieee 488 client tests. </summary>
+/// <summary>   (Unit Test Class) an VXI-11 client tests. </summary>
 [TestClass]
-public class Ieee488ClientTests
+public class Vxi11ClientTests
 {
 
     #region " fixture construction and cleanup "
@@ -44,7 +46,7 @@ public class Ieee488ClientTests
     /// <returns>   An int. </returns>
     private static int AssertUniqueClientIdShouldBeGenerated()
     {
-        int clientId = IEEE488.Ieee488Client.GetNextClientId();
+        int clientId = Vxi11Client.GetNextClientId();
         Assert.IsTrue( clientId >= 0 );
         return clientId;
     }

@@ -28,14 +28,14 @@ public partial class LxiDevice : IVxi11Device
         this._characterEncoding = CoreChannelClient.EncodingDefault;
         this.DeviceLink = null;
         this._deviceLink = null;
-        this.MaxReceiveLength = IEEE488.Ieee488Client.MaxReceiveLengthDefault;
+        this.MaxReceiveLength = Vxi11Client.MaxReceiveLengthDefault;
         this.AbortPortNumber = AbortChannelServer.AbortPortDefault;
         this.OnDevicePropertiesChanges( this._device );
         this.Host = string.Empty;
         this._host = string.Empty;
-        this.ReadTermination = Ieee488Client.ReadTerminationDefault;
-        this.WriteTermination = Ieee488Client.WriteTerminationDefault;
-        this._writeTermination = Ieee488Client.WriteTerminationDefault;
+        this.ReadTermination = Vxi11Client.ReadTerminationDefault;
+        this.WriteTermination = Vxi11Client.WriteTerminationDefault;
+        this._writeTermination = Vxi11Client.WriteTerminationDefault;
     }
 
     #endregion

@@ -6,7 +6,7 @@ using cc.isr.VXI11.Codecs;
 namespace cc.isr.LXI.IEEE488;
 
 /// <summary>   An IEEE 488 instrument. </summary>
-public class Ieee488Instrument : Ieee488Client
+public class Ieee488Instrument : Vxi11Client
 {
 
     #region " construction and cleanup "

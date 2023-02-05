@@ -52,7 +52,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
         this.WriteMessage = string.Empty;
         this._writeMessage = string.Empty;
         this.AbortPortNumber = AbortChannelServer.AbortPortDefault;
-        this.MaxReceiveLength = Ieee488Client.MaxReceiveLengthDefault;
+        this.MaxReceiveLength = Vxi11Client.MaxReceiveLengthDefault;
         this.InterruptAddress = IPAddress.Any;
         this.DeviceLink = new DeviceLink();
     }

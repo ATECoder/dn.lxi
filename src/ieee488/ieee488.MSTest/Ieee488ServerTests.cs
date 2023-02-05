@@ -6,6 +6,7 @@ using cc.isr.LXI.Logging;
 using cc.isr.LXI.IEEE488.Mock;
 using cc.isr.ONC.RPC.Portmap;
 using cc.isr.ONC.RPC.Server;
+using cc.isr.VXI11;
 
 namespace cc.isr.LXI.IEEE488.MSTest;
 
@@ -146,19 +147,19 @@ public class Ieee488ServerTests
     /// <param name="repeatCount">  Number of repeats. </param>
     private static void AssertIdentityShouldQuery( string ipv4Address, int repeatCount )
     {
-        using Ieee488Client ieee488Client = new();
-        ieee488Client.ThreadExceptionOccurred += OnThreadException;
+        using Vxi11Client vxi11Client = new();
+        vxi11Client.ThreadExceptionOccurred += OnThreadException;
 
         string identity = Ieee488ServerTests._identity;
         string command = Ieee488Commands.IDNRead;
-        ieee488Client.Connect( ipv4Address,
+        vxi11Client.Connect( ipv4Address,
                                DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily, 0 ) );
 
         int count = repeatCount;
         while ( repeatCount > 0 )
         {
             repeatCount--;
-            (_, string response) = ieee488Client.Query( $"{command}\n", 0 );
+            (_, string response) = vxi11Client.Query( $"{command}\n", 0 );
             Assert.AreEqual( identity, response, $"@count = {count - repeatCount}" );
         }
 

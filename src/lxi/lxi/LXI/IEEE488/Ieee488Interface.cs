@@ -2,7 +2,7 @@ using cc.isr.VXI11.Codecs;
 
 using cc.isr.VXI11;
 namespace cc.isr.LXI.IEEE488;
-public class Ieee488Interface : Ieee488Client
+public class Ieee488Interface : Vxi11Client
 {
 
     #region " construction and cleanup "
