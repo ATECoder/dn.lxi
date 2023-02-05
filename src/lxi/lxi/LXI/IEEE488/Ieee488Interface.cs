@@ -1,6 +1,7 @@
 using cc.isr.VXI11.Codecs;
 
 using cc.isr.VXI11;
+
 namespace cc.isr.LXI.IEEE488;
 public class Ieee488Interface : Vxi11Client
 {
@@ -32,7 +33,7 @@ public class Ieee488Interface : Vxi11Client
         if ( this.DeviceLink is null || this.CoreClient is null ) return Array.Empty<byte>();
 
         DeviceDoCmdResp reply = this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                            ( int ) Ieee488InterfaceCommand.SendCommand, true, 1, data );
+                                                            ( int ) InterfaceCommand.SendCommand, true, 1, data );
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
@@ -85,7 +86,7 @@ public class Ieee488Interface : Vxi11Client
         return this.DeviceLink is null || this.CoreClient is null
             ? 0
             : this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                            ( int ) Ieee488InterfaceCommand.BusStatus, 2, interfaceCommand );
+                                                            ( int ) InterfaceCommand.BusStatus, 2, interfaceCommand );
     }
 
     /// <summary>   Read REN line. </summary>
@@ -93,7 +94,7 @@ public class Ieee488Interface : Vxi11Client
     /// <returns>   1 if the REN message is true, 0 otherwise. </returns>
     public virtual int ReadRenLine()
     {
-        return this.BusStatus( ( int ) Ieee488InterfaceCommandOption.RemoteStatus );
+        return this.BusStatus( ( int ) InterfaceCommandOption.RemoteStatus );
     }
 
     /// <summary>   Reads service request (SRQ) line. </summary>
@@ -101,15 +102,15 @@ public class Ieee488Interface : Vxi11Client
     /// <returns>   1 if the SRQ message is true, 0 otherwise. </returns>
     public virtual int ReadServiceRequest()
     {
-        return this.BusStatus( ( int ) Ieee488InterfaceCommandOption.ServiceRequestStatus );
+        return this.BusStatus( ( int ) InterfaceCommandOption.ServiceRequestStatus );
     }
 
-    /// <summary>   Reads <see cref="Ieee488InterfaceCommandOption.NotDataAcceptedLineStatus"/> NDAC line. </summary>
+    /// <summary>   Reads <see cref="InterfaceCommandOption.NotDataAcceptedLineStatus"/> NDAC line. </summary>
     /// <remarks>   2023-01-24. </remarks>
     /// <returns>   1 if the NDAC message is true, 0 otherwise. </returns>
     public virtual int ReadNdacLine()
     {
-        return this.BusStatus( ( int ) Ieee488InterfaceCommandOption.NotDataAcceptedLineStatus );
+        return this.BusStatus( ( int ) InterfaceCommandOption.NotDataAcceptedLineStatus );
     }
 
     /// <summary>   Check if interface device is a system controller. </summary>
@@ -118,7 +119,7 @@ public class Ieee488Interface : Vxi11Client
     /// system control active state, <see langword="false"/> otherwise. </returns>
     public virtual bool IsSystemController()
     {
-        return 0 != this.BusStatus( ( int ) Ieee488InterfaceCommandOption.SystemControllerStatus );
+        return 0 != this.BusStatus( ( int ) InterfaceCommandOption.SystemControllerStatus );
     }
 
     /// <summary>   Check if interface device is the controller-in-charge. </summary>
@@ -129,7 +130,7 @@ public class Ieee488Interface : Vxi11Client
     /// </returns>
     public virtual bool IsControllerInCharge()
     {
-        return 0 != this.BusStatus( ( int ) Ieee488InterfaceCommandOption.ControllerInChargeStatus );
+        return 0 != this.BusStatus( ( int ) InterfaceCommandOption.ControllerInChargeStatus );
     }
 
     /// <summary>   Check if interface device is addressed as a talker. </summary>
@@ -140,7 +141,7 @@ public class Ieee488Interface : Vxi11Client
     /// </returns>
     public virtual bool IsTalker()
     {
-        return 0 != this.BusStatus( ( int ) Ieee488InterfaceCommandOption.TalkerStatus );
+        return 0 != this.BusStatus( ( int ) InterfaceCommandOption.TalkerStatus );
     }
 
     /// <summary>   Check if interface device is addressed as a listener. </summary>
@@ -150,7 +151,7 @@ public class Ieee488Interface : Vxi11Client
     /// </returns>
     public virtual bool IsListener()
     {
-        return 0 != this.BusStatus( ( int ) Ieee488InterfaceCommandOption.ListenerStatus );
+        return 0 != this.BusStatus( ( int ) InterfaceCommandOption.ListenerStatus );
     }
 
     /// <summary>   Get interface device bus address. </summary>
@@ -158,7 +159,7 @@ public class Ieee488Interface : Vxi11Client
     /// <returns>   The TCP/IP-IEEE 488.1 Interface Device's address (0-30). </returns>
     public virtual int GetBusAddress()
     {
-        return this.BusStatus( ( int ) Ieee488InterfaceCommandOption.BusAddressStatus );
+        return this.BusStatus( ( int ) InterfaceCommandOption.BusAddressStatus );
     }
 
     #endregion
@@ -180,7 +181,7 @@ public class Ieee488Interface : Vxi11Client
     {
         return this.DeviceLink is not null && this.CoreClient is not null
             && value == this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                       ( int ) Ieee488InterfaceCommand.AttentionControl, 2, value );
+                                                       ( int ) InterfaceCommand.AttentionControl, 2, value );
     }
 
     /// <summary>   Sets REN line. </summary>
@@ -200,7 +201,7 @@ public class Ieee488Interface : Vxi11Client
     {
         return this.DeviceLink is not null && this.CoreClient is not null
             && value == this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                       ( int ) Ieee488InterfaceCommand.RemoteEnableControl, 2, value );
+                                                       ( int ) InterfaceCommand.RemoteEnableControl, 2, value );
     }
 
     /// <summary>   Pass control to another controller. </summary>
@@ -217,7 +218,7 @@ public class Ieee488Interface : Vxi11Client
                 && (addr < 0 || addr > 30
                     ? throw new DeviceException( $"; {nameof( PassControl )} failed because {addr} is an invalid bus address.", DeviceErrorCode.ParameterError )
                     : addr == this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                   ( int ) Ieee488InterfaceCommand.PassControl, 4, addr ));
+                                                   ( int ) InterfaceCommand.PassControl, 4, addr ));
     }
 
     /// <summary>   Set interface device bus address. </summary>
@@ -239,7 +240,7 @@ public class Ieee488Interface : Vxi11Client
         }
 
         int reply = this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                           ( int ) Ieee488InterfaceCommand.BusAddress, 4, addr );
+                                                           ( int ) InterfaceCommand.BusAddress, 4, addr );
         if ( reply == addr )
             this.BusAddress = addr;
         return addr == reply;
@@ -256,7 +257,7 @@ public class Ieee488Interface : Vxi11Client
         if ( this.DeviceLink is null || this.CoreClient is null ) return Array.Empty<byte>();
 
         DeviceDoCmdResp reply = this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
-                                                            ( int ) Ieee488InterfaceCommand.InterfaceClearControl, true, 1, Array.Empty<byte>() );
+                                                            ( int ) InterfaceCommand.InterfaceClearControl, true, 1, Array.Empty<byte>() );
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )

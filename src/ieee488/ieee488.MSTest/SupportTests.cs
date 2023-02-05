@@ -1,5 +1,4 @@
 using cc.isr.LXI.Logging;
-using cc.isr.LXI.IEEE488;
 using cc.isr.LXI.IEEE488.EnumExtensions;
 using cc.isr.LXI.IEEE488.Mock;
 
@@ -82,21 +81,21 @@ public class SupportTests
         _ = Assert.ThrowsException<ArgumentException>( () => { AssertIntShouldCastToIeee488OperationType( maxValue + 1 ); } );
     }
 
-    /// <summary>   Assert <see cref="int"/> should cast to <see cref="Ieee488InterfaceCommand"/>. </summary>
+    /// <summary>   Assert <see cref="int"/> should cast to <see cref="InterfaceCommand"/>. </summary>
     /// <param name="expected"> The expected value. </param>
     private static void AssertIntShouldCastToIeee488InterfaceCommand( int expected )
     {
-        Ieee488InterfaceCommand actual = expected.ToIeee488InterfaceCommand();
+        InterfaceCommand actual = expected.ToIeee488InterfaceCommand();
         Assert.AreEqual( expected, ( int ) actual );
     }
 
-    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="Ieee488InterfaceCommand"/>. </summary>
+    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="InterfaceCommand"/>. </summary>
     [TestMethod]
     public void IntShouldCastToIeee488InterfaceCommand()
     {
         int value = 0;
         int maxValue = 0;
-        foreach ( var enumValue in Enum.GetValues( typeof( Ieee488InterfaceCommand ) ) )
+        foreach ( var enumValue in Enum.GetValues( typeof( InterfaceCommand ) ) )
         {
             value = ( int ) enumValue;
             maxValue = value > maxValue ? value : maxValue;
@@ -105,21 +104,21 @@ public class SupportTests
         _ = Assert.ThrowsException<ArgumentException>( () => { AssertIntShouldCastToIeee488InterfaceCommand( maxValue + 1 ); } );
     }
 
-    /// <summary>   Assert <see cref="int"/> should cast to <see cref="Ieee488InterfaceCommandOption"/>. </summary>
+    /// <summary>   Assert <see cref="int"/> should cast to <see cref="InterfaceCommandOption"/>. </summary>
     /// <param name="expected"> The expected value. </param>
     private static void AssertIntShouldCastToIeee488InterfaceCommandOption( int expected )
     {
-        Ieee488InterfaceCommandOption actual = expected.ToIeee488InterfaceCommandOption();
+        InterfaceCommandOption actual = expected.ToIeee488InterfaceCommandOption();
         Assert.AreEqual( expected, ( int ) actual );
     }
 
-    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="Ieee488InterfaceCommandOption"/>. </summary>
+    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="InterfaceCommandOption"/>. </summary>
     [TestMethod]
     public void IntShouldCastToIeee488InterfaceCommandOption()
     {
         int value = 0;
         int maxValue = 0;
-        foreach ( var enumValue in Enum.GetValues( typeof( Ieee488InterfaceCommandOption ) ) )
+        foreach ( var enumValue in Enum.GetValues( typeof( InterfaceCommandOption ) ) )
         {
             value = ( int ) enumValue;
             maxValue = value > maxValue ? value : maxValue;

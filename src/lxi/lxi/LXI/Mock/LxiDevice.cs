@@ -8,7 +8,7 @@ using System.Net;
 
 namespace cc.isr.LXI.Mock;
 
-/// <summary>   A unit test amenable implementation of an LXI Device. </summary>
+/// <summary>   A basic implementation of a <see cref="IVxi11Device"/> interface. </summary>
 public partial class LxiDevice : IVxi11Device
 {
 
