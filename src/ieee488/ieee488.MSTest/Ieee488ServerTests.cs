@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-using cc.isr.VXI11.Visa;
+using cc.isr.LXI.Visa;
 
 using cc.isr.LXI.Logging;
 using cc.isr.LXI.IEEE488.Mock;
@@ -168,24 +168,24 @@ public class Ieee488ServerTests
     /// <remarks>
     /// <code>
     /// Standard Output: 
-    ///   2023-02-02 20:38:04.894,cc.isr.LXI.IEEE488.MSTest.Ieee488ServerTests.Ieee488ServerTests
-    ///   2023-02-02 20:38:04.902,Ieee488SingleClientMockServer waiting running 04.901
-    ///   2023-02-02 20:38:04.902,starting the embedded port map service; this takes ~3.5 seconds.
-    ///   2023-02-02 20:38:04.903,Checking for portmap service
-    ///   2023-02-02 20:38:05.026, No portmap service available.
-    ///   2023-02-02 20:38:05.026,Creating embedded portmap instance
-    ///   2023-02-02 20:38:05.238, Portmap service started; checked 122.6 ms.
-    ///   2023-02-02 20:38:05.238,starting the server task; this takes ~2.5 seconds.
-    ///   2023-02-02 20:38:05.244,Running set to True
-    ///   2023-02-02 20:38:11.980, Ieee488SingleClientMockServer is running  11.980
-    ///   2023-02-02 20:38:11.991,creating link to inst0
-    ///   2023-02-02 20:38:11.996, link ID: 1 -> Received：*IDN?
-    ///   
-    ///   2023-02-02 20:38:11.996,Process the instruction： *IDN?
-    ///   2023-02-02 20:38:11.996,*IDN?
-    ///   2023-02-02 20:38:11.996,Ieee488 mock device
-    ///   2023-02-02 20:38:11.996,Query results： Ieee488 mock device。
-    ///   2023-02-02 20:38:12.012,Running set to False
+    /// 2023-02-04 19:36:03.032,cc.isr.LXI.IEEE488.MSTest.Ieee488ServerTests.Ieee488ServerTests
+    /// 2023-02-04 19:36:03.071,Ieee488SingleClientMockServer waiting running 03.071
+    /// 2023-02-04 19:36:03.071,starting the embedded port map service; this takes ~3.5 seconds.
+    /// 2023-02-04 19:36:03.072,Checking for Portmap service
+    /// 2023-02-04 19:36:03.090, No Portmap service available.
+    /// 2023-02-04 19:36:03.090,Creating embedded Portmap instance
+    /// 2023-02-04 19:36:03.312, Portmap service started; checked 18.1 ms.
+    /// 2023-02-04 19:36:03.312,starting the server task; this takes ~2.5 seconds.
+    /// 2023-02-04 19:36:03.319,Running set to True
+    /// 2023-02-04 19:36:10.076, Ieee488SingleClientMockServer is running  10.076
+    /// 2023-02-04 19:36:10.088,creating link to inst0
+    /// 2023-02-04 19:36:10.093, link ID: 1 -> Received：*IDN?
+    ///
+    /// 2023-02-04 19:36:10.093,Process the instruction： *IDN?
+    /// 2023-02-04 19:36:10.093,*IDN?
+    /// 2023-02-04 19:36:10.093,Ieee488 mock device
+    /// 2023-02-04 19:36:10.093,Query results： Ieee488 mock device。
+    /// 2023-02-04 19:36:10.109,Running set to False
     /// </code>
     /// </remarks>
     [TestMethod]

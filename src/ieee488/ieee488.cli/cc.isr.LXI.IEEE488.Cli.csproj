@@ -19,4 +19,8 @@
 
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\lxi\lxi\cc.isr.LXI.csproj" />
+  </ItemGroup>
+
 </Project>

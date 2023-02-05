@@ -1,6 +1,6 @@
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
-using cc.isr.VXI11.Visa;
+using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 using System.ComponentModel;
 using cc.isr.LXI.IEEE488;

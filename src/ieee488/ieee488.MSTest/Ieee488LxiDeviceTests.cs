@@ -187,12 +187,12 @@ public class Ieee488LxiDeviceTests
     /// <remarks>
     /// <code>
     /// Standard Output: 
-    ///   2023-02-03 20:09:12.193,cc.isr.LXI.IEEE488.MSTest.Ieee488LxiDevice.Ieee488LxiDevice
-    ///   2023-02-03 20:09:12.275,creating link to inst0
-    ///   2023-02-03 20:09:12.279, link ID: 1 -> Received：*IDN?
-    ///   
-    ///   2023-02-03 20:09:12.279,Process the instruction： *IDN?
-    ///   2023-02-03 20:09:12.280,Query results： INTEGRATED SCIENTIFIC RESOURCES,MODEL IEEE488Mock,001,1.0.8434。
+    /// 2023-02-04 19:37:27.368,cc.isr.LXI.IEEE488.MSTest.Ieee488LxiDeviceTests.Ieee488LxiDeviceTests
+    /// 2023-02-04 19:37:27.378,creating link to inst0
+    /// 2023-02-04 19:37:27.382, link ID: 1 -> Received：*IDN?
+    ///
+    /// 2023-02-04 19:37:27.382,Process the instruction： *IDN?
+    /// 2023-02-04 19:37:27.383,Query results： INTEGRATED SCIENTIFIC RESOURCES,MODEL IEEE488Mock,001,1.0.8434。
     /// </code>
     /// </remarks>
     [TestMethod]

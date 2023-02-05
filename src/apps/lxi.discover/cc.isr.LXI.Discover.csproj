@@ -20,7 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\lxi\cc.isr.LXI\cc.isr.LXI.csproj" />
+    <ProjectReference Include="..\..\lxi\lxi\cc.isr.LXI.csproj" />
+    <ProjectReference Include="..\..\lxi\lxi\cc.isr.LXI.csproj" />
   </ItemGroup>
 
 </Project>

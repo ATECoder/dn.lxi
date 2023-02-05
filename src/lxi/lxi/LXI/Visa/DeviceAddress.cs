@@ -1,6 +1,6 @@
 namespace cc.isr.LXI.Visa;
 
-/// <summary>   A VISA INSTR interface device address manager. </summary>
+/// <summary>   A VISA INST interface device address manager. </summary>
 public struct DeviceAddress
 {
 
@@ -253,10 +253,10 @@ public struct DeviceAddress
                 this.InterfaceNumber = interfaceNumber;
         if ( info.Length < 2 ) return true; // address is like 'usb0'
         info = info[1].Split( ':' );
-        this.ManufacturerId = Support.ToInt( info[0] );
-        this.ModelCode = Support.ToInt( info[2] );
+        this.ManufacturerId = LxiSupport.ToInt( info[0] );
+        this.ModelCode = LxiSupport.ToInt( info[2] );
         this.SerialNumber = info[4];
-        this.UsbTmcInterfaceNumber = info.Length > 6 ? Support.ToInt( info[6] ) : 0;
+        this.UsbTmcInterfaceNumber = info.Length > 6 ? LxiSupport.ToInt( info[6] ) : 0;
 
         return true;
     }

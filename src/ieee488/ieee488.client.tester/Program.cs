@@ -1,5 +1,6 @@
 // See https://aka.ms/new-console-template for more information
 
+using cc.isr.LXI.Visa;
 using cc.isr.LXI.IEEE488;
 using cc.isr.LXI.Logging;
 
@@ -30,7 +31,7 @@ Console.ReadKey();
 // client.connect("127.0.0.1", "inst0");
 Console.WriteLine( $"Connecting to {ipv4Address}" );
 
-ieee488Client.Connect( ipv4Address, cc.isr.VXI11.Visa.DeviceAddress.BuildInterfaceDeviceString( cc.isr.VXI11.Visa.DeviceAddress.GenericInterfaceFamily, 0 ) );
+ieee488Client.Connect( ipv4Address, DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily, 0 ) );
 
 if ( ipv4Address == "127.0.0.1" )
 {
@@ -82,7 +83,7 @@ void SendCommand( string command )
 static void OnThreadExcetion( object sender, ThreadExceptionEventArgs e )
 {
     string name = "unknown";
-    if ( sender is cc.isr.LXI.IEEE488.Ieee488Client ) name = nameof( cc.isr.LXI.IEEE488.Ieee488Client );
+    if ( sender is Ieee488Client ) name = nameof( Ieee488Client );
 
-    Logger.Writer.LogError( $"{name}  encountered an exception during an asynchronous operation", e.Exception );
+    Logger.Writer.LogError( $"{name} encountered an exception during an asynchronous operation", e.Exception );
 }

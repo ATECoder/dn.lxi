@@ -2,7 +2,7 @@ using System.Net;
 using System.Text;
 
 using cc.isr.VXI11;
-using cc.isr.VXI11.Visa;
+using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 
 namespace cc.isr.LXI.Discover;
@@ -80,12 +80,12 @@ to discover all the instruments listening on the local IPs of this machine.
     {
         Console.WriteLine( $"Discovering instruments on {ip}...." );
 
-        List<IPEndPoint> endpoints = DeviceExplorer.ListCoreDevicesEndpoints( IPAddress.Parse( ip ), timeout, true );
+        List<IPEndPoint> endpoints = Vxi11Discoverer.ListCoreDevicesEndpoints( IPAddress.Parse( ip ), timeout, true );
 
         Console.WriteLine( $"Found {endpoints.Count} instruments on {ip}\n" );
         foreach ( IPEndPoint endpoint in endpoints )
         {
-            Console.WriteLine( $"{endpoint}: {QueryInstrumet( endpoint.Address.ToString() )}" );
+            Console.WriteLine( $"{endpoint}: {QueryIdentity( endpoint.Address.ToString() )}" );
         }
     }
 
@@ -93,12 +93,12 @@ to discover all the instruments listening on the local IPs of this machine.
     {
         Console.WriteLine( $"Discovering instruments on {ip}...." );
 
-        List<IPAddress> addresses = DeviceExplorer.ListCoreDevicesAddresses( IPAddress.Parse( ip ), timeout, true );
+        List<IPAddress> addresses = Vxi11Discoverer.ListCoreDevicesAddresses( IPAddress.Parse( ip ), timeout, true );
 
         Console.WriteLine( $"Found {addresses.Count} instruments on {ip}\n" );
         foreach ( IPAddress address in addresses )
         {
-            Console.WriteLine( $"{address}: {QueryInstrumet( address.ToString() )}" );
+            Console.WriteLine( $"{address}: {QueryIdentity( address.ToString() )}" );
         }
     }
 
@@ -114,7 +114,7 @@ to discover all the instruments listening on the local IPs of this machine.
             double totalTimeout = 0;
             foreach ( IPAddress address in GetLocalBroadcastAddresses() )
             {
-                IPAddress[] ips = DeviceExplorer.EnumerateAddresses( address );
+                IPAddress[] ips = Vxi11Discoverer.EnumerateAddresses( address );
                 totalTimeout += ips.Length * ( double ) timeout;
             }
             Console.WriteLine( $"Discovery is estimated to take {totalTimeout / 1000} seconds...\n" );
@@ -125,7 +125,7 @@ to discover all the instruments listening on the local IPs of this machine.
         }
         else
         {
-            IPAddress[] ips = DeviceExplorer.EnumerateAddresses( IPAddress.Parse( ip ) );
+            IPAddress[] ips = Vxi11Discoverer.EnumerateAddresses( IPAddress.Parse( ip ) );
             Console.WriteLine( $"Discovery is estimated to take {ips.Length * ( double ) timeout / 1000} seconds...\n" );
             DiscoverAddresses( ip, timeout );
         }
@@ -140,15 +140,21 @@ to discover all the instruments listening on the local IPs of this machine.
         Console.Write( builder.ToString() );
     }
 
-    public static string QueryInstrumet( string ipv4Address )
+    /// <summary>   Queries the instrument identity. </summary>
+    /// <param name="ipv4Address">  The IPv4 address. </param>
+    /// <returns>   The instrument. </returns>
+    public static string QueryIdentity( string ipv4Address )
     {
         using Vxi11Client instrument = new();
-        instrument.ThreadExceptionOccurred += OnThreadExcetion;
+        instrument.ThreadExceptionOccurred += OnThreadException;
         instrument.Connect( ipv4Address, DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily,0 ) );
         return instrument.QueryLine( "*IDN?" ).response;
     }
 
-    internal static void OnThreadExcetion( object sender, ThreadExceptionEventArgs e )
+    /// <summary>   Raises the thread exception event. </summary>
+    /// <param name="sender">   Source of the event. </param>
+    /// <param name="e">        Event information to send to registered event handlers. </param>
+    internal static void OnThreadException( object sender, ThreadExceptionEventArgs e )
     {
         string name = "unknown";
         if ( sender is Vxi11Client ) name = nameof( Vxi11Client );

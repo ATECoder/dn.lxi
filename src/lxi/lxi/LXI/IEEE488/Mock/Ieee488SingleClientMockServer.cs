@@ -5,7 +5,7 @@ using cc.isr.ONC.RPC;
 using cc.isr.ONC.RPC.Client;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
-using cc.isr.VXI11.Visa;
+using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 
 namespace cc.isr.LXI.IEEE488.Mock;

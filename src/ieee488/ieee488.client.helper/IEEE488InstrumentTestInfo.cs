@@ -43,7 +43,7 @@ public static class IEEE488InstrumentTestInfo
 
         string instrument = instrumentId == InstrumentId.None ? "Echo" : instrumentId.ToString();
         string ipv4Address = _instrumentInfo[instrument].IPv4Address;
-        if ( !DeviceExplorer.Paping( ipv4Address, portNumber, ( int ) connectionTimeout.TotalMilliseconds ) )
+        if ( !Vxi11Discoverer.Paping( ipv4Address, portNumber, ( int ) connectionTimeout.TotalMilliseconds ) )
         {
             QueryInfo = $"Attempt to establish a TCP connection with the {instrument} at {ipv4Address}:{portNumber} aborted after {connectionTimeout.TotalMilliseconds:0.0} ms";
             return false;

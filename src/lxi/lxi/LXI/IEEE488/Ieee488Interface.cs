@@ -7,6 +7,10 @@ public class Ieee488Interface : Ieee488Client
 
     #region " construction and cleanup "
 
+    /// <summary>   Connects. </summary>
+    /// <param name="hostAddress">              The host address. </param>
+    /// <param name="interfaceDeviceString">    The interface device string. </param>
+    /// <param name="connectTimeout">           (Optional) The connect timeout. </param>
     public override void Connect( string hostAddress, string interfaceDeviceString, int connectTimeout = 3000 )
     {
         base.Connect( hostAddress, interfaceDeviceString, connectTimeout );
