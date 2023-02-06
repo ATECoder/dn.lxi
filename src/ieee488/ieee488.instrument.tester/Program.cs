@@ -1,7 +1,7 @@
 // See https://aka.ms/new-console-template for more information
 
+using cc.isr.VXI11;
 using cc.isr.LXI.IEEE488;
-using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 
 Console.WriteLine( $"VXI-11 {nameof( Ieee488Instrument)} Tester" );
@@ -31,7 +31,7 @@ Console.ReadKey();
 // client.connect("127.0.0.1", "inst0");
 Console.WriteLine( $"Connecting to {ipv4Address}" );
 
-instrument.Connect( ipv4Address, DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily, 0) );
+instrument.Connect( ipv4Address, InsterfaceDeviceStringParser.BuildInterfaceDeviceString( InsterfaceDeviceStringParser.GenericInterfaceFamily, 0) );
 
 if ( ipv4Address == "127.0.0.1" )
 {

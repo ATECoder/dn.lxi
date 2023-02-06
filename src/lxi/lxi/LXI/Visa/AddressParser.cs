@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+using cc.isr.VXI11;
+
 namespace cc.isr.LXI.Visa;
 
 /// <summary>   A parser for the address of a VISA resource. </summary>
@@ -29,7 +31,7 @@ public class AddressParser : AddressBase
     {
         this.Board = board;
         this.Host = host;
-        this.Device = device;
+        this.InterfaceDeviceString = device;
     }
 
     /// <summary>   Gets or sets the RegEx pattern. </summary>
@@ -50,7 +52,7 @@ public class AddressParser : AddressBase
         StringBuilder builder = new();
         _ = builder.Append( @$"^(?<{nameof( this.Board )}>(?<{nameof( AddressBase.Protocol )}>{this.ProtocolDefault})\d*)" );
         _ = builder.Append( @$"(::(?<{nameof( AddressBase.Host )}>[^\s:]+))" );
-        _ = builder.Append( @$"(::(?<{nameof( AddressBase.Device )}>[^\s:]+(\[.+\])?))" );
+        _ = builder.Append( @$"(::(?<{nameof( AddressBase.InterfaceDeviceString )}>[^\s:]+(\[.+\])?))" );
         _ = builder.Append( @$"?(::(?<{nameof( AddressBase.Suffix )}>{this.SuffixDefault}))$" );
         this.RegexPattern = builder.ToString();
         // this.RegexPattern = @$"^(?<Board>(?<Protocol>TCPIP)\d*)(::(?<Host>[^\s:]+))(::(?<Device>[^\s:]+(\[.+\])?))?(::(?<Suffix>INSTR))$";
@@ -69,8 +71,8 @@ public class AddressParser : AddressBase
         this.Board = m.Groups[nameof( AddressBase.Board )].Value;
         this.Protocol = m.Groups[nameof( AddressBase.Protocol )].Value;
         this.Host = m.Groups[nameof( AddressBase.Host )].Value;
-        this.Device = m.Groups[nameof( AddressBase.Device )].Value;
-        this.Device = string.IsNullOrEmpty( this.Device ) ? $"{DeviceAddress.GenericInterfaceFamily}0" : this.Device;
+        this.InterfaceDeviceString = m.Groups[nameof( AddressBase.InterfaceDeviceString )].Value;
+        this.InterfaceDeviceString = string.IsNullOrEmpty( this.InterfaceDeviceString ) ? $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0" : this.InterfaceDeviceString;
         this.Suffix = m.Groups[nameof( AddressBase.Suffix )].Value;
         return true;
     }

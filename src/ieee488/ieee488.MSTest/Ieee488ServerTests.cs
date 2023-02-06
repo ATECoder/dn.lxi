@@ -1,7 +1,5 @@
 using System.ComponentModel;
 
-using cc.isr.LXI.Visa;
-
 using cc.isr.LXI.Logging;
 using cc.isr.LXI.IEEE488.Mock;
 using cc.isr.ONC.RPC.Portmap;
@@ -147,13 +145,13 @@ public class Ieee488ServerTests
     /// <param name="repeatCount">  Number of repeats. </param>
     private static void AssertIdentityShouldQuery( string ipv4Address, int repeatCount )
     {
-        using Vxi11Client vxi11Client = new();
+        using VXI11.Client.Vxi11Client vxi11Client = new();
         vxi11Client.ThreadExceptionOccurred += OnThreadException;
 
         string identity = Ieee488ServerTests._identity;
         string command = Ieee488Commands.IDNRead;
         vxi11Client.Connect( ipv4Address,
-                               DeviceAddress.BuildInterfaceDeviceString( DeviceAddress.GenericInterfaceFamily, 0 ) );
+                               InsterfaceDeviceStringParser.BuildInterfaceDeviceString( InsterfaceDeviceStringParser.GenericInterfaceFamily, 0 ) );
 
         int count = repeatCount;
         while ( repeatCount > 0 )

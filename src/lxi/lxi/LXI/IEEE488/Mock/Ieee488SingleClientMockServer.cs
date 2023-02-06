@@ -5,7 +5,6 @@ using cc.isr.ONC.RPC;
 using cc.isr.ONC.RPC.Client;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
-using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 
 namespace cc.isr.LXI.IEEE488.Mock;
@@ -52,9 +51,10 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
         this.WriteMessage = string.Empty;
         this._writeMessage = string.Empty;
         this.AbortPortNumber = AbortChannelServer.AbortPortDefault;
-        this.MaxReceiveLength = Vxi11Client.MaxReceiveLengthDefault;
+        this.MaxReceiveLength = VXI11.Client.Vxi11Client.MaxReceiveLengthDefault;
         this.InterruptAddress = IPAddress.Any;
         this.DeviceLink = new DeviceLink();
+        this._interfaceDeviceAddress = new( string.Empty ) ;
     }
 
     /// <summary>
@@ -399,10 +399,10 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
         private set => _ = this.SetProperty( ref this._interfaceDeviceString, value );
     }
 
-    private DeviceAddress _interfaceDeviceAddress;
+    private InsterfaceDeviceStringParser _interfaceDeviceAddress;
     /// <summary>   Gets or sets the interface device address. </summary>
     /// <value> The interface device address. </value>
-    public DeviceAddress InterfaceDeviceAddress
+    public InsterfaceDeviceStringParser InterfaceDeviceAddress
     {
         get => this._interfaceDeviceAddress;
         set {
@@ -521,7 +521,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
             // note that the 7510 responds to an incorrect interface device name 
             // with the DeviceErrorCode.DeviceNotAccessible; I believe that the 
             // Invalid link identifier is more informative as to the cause of this error.
-            this.InterfaceDeviceAddress = new DeviceAddress( request.InterfaceDeviceString );
+            this.InterfaceDeviceAddress = new InsterfaceDeviceStringParser( request.InterfaceDeviceString );
             reply.ErrorCode = this.InterfaceDeviceAddress.IsValid()
                 ? DeviceErrorCode.NoError
                 : DeviceErrorCode.InvalidLinkIdentifier;

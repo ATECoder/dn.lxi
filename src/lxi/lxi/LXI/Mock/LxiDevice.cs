@@ -1,10 +1,10 @@
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
-using cc.isr.LXI.Visa;
 using cc.isr.LXI.Logging;
 using System.ComponentModel;
 using cc.isr.LXI.IEEE488;
 using System.Net;
+using cc.isr.VXI11.Server;
 
 namespace cc.isr.LXI.Mock;
 
@@ -26,16 +26,36 @@ public partial class LxiDevice : IVxi11Device
         this._writeMessage = string.Empty;
         this.CharacterEncoding = CoreChannelClient.EncodingDefault;
         this._characterEncoding = CoreChannelClient.EncodingDefault;
+        this.InterfaceDeviceString = string.Empty;
+        this._interfaceDeviceString = string.Empty;
+        this._interfaceDeviceAddress = new InsterfaceDeviceStringParser( string.Empty );
         this.DeviceLink = null;
         this._deviceLink = null;
-        this.MaxReceiveLength = Vxi11Client.MaxReceiveLengthDefault;
+        this.MaxReceiveLength = VXI11.Client.Vxi11Client.MaxReceiveLengthDefault;
         this.AbortPortNumber = AbortChannelServer.AbortPortDefault;
         this.OnDevicePropertiesChanges( this._device );
         this.Host = string.Empty;
         this._host = string.Empty;
-        this.ReadTermination = Vxi11Client.ReadTerminationDefault;
-        this.WriteTermination = Vxi11Client.WriteTerminationDefault;
-        this._writeTermination = Vxi11Client.WriteTerminationDefault;
+        this.ReadTermination = VXI11.Client.Vxi11Client.ReadTerminationDefault;
+        this.WriteTermination = VXI11.Client.Vxi11Client.WriteTerminationDefault;
+        this._writeTermination = VXI11.Client.Vxi11Client.WriteTerminationDefault;
+    }
+
+    #endregion
+
+    #region " thread exception handler "
+
+    /// <summary>
+    /// Event queue for all listeners interested in ThreadExceptionOccurred events.
+    /// </summary>
+    public event ThreadExceptionEventHandler? ThreadExceptionOccurred;
+
+    /// <summary>   Executes the <see cref="ThreadExceptionOccurred"/> event. </summary>
+    /// <param name="e">    Event information to send to registered event handlers. </param>
+    protected virtual void OnThreadException( ThreadExceptionEventArgs e )
+    {
+        var handler = this.ThreadExceptionOccurred;
+        handler?.Invoke( this, e );
     }
 
     #endregion
@@ -190,6 +210,15 @@ public partial class LxiDevice : IVxi11Device
         set => _ = this.SetProperty( ref this._interfaceDeviceString, value );
     }
 
+    /// <summary>   Query if this device has valid interface device string. </summary>
+    /// <remarks> This is required for validating the interface device string when creating the link. </remarks>
+    /// <returns>   True if valid interface device string, false if not. </returns>
+    public bool IsValidInterfaceDeviceString()
+    {
+        InsterfaceDeviceStringParser parser = new( this.InterfaceDeviceString );
+        return parser.IsValid();
+    }
+
     private bool _eoi;
     /// <summary>
     /// Gets or sets a value indicating whether the end-or-identify (EOI) terminator is enabled.
@@ -302,10 +331,10 @@ public partial class LxiDevice : IVxi11Device
         } 
     }
 
-    private DeviceAddress _interfaceDeviceAddress;
+    private InsterfaceDeviceStringParser _interfaceDeviceAddress;
     /// <summary>   Gets or sets the interface device address. </summary>
     /// <value> The interface device. </value>
-    public DeviceAddress InterfaceDeviceAddress
+    public InsterfaceDeviceStringParser InterfaceDeviceAddress
     {
         get => this._interfaceDeviceAddress;
         set {
@@ -478,7 +507,7 @@ public partial class LxiDevice : IVxi11Device
 
             Logger.Writer.LogVerbose( $"creating link to {request.InterfaceDeviceString}" );
 
-            this.InterfaceDeviceAddress = new DeviceAddress( request.InterfaceDeviceString );
+            this.InterfaceDeviceAddress = new InsterfaceDeviceStringParser( request.InterfaceDeviceString );
             reply.ErrorCode = this.InterfaceDeviceAddress.IsValid()
                 ? DeviceErrorCode.NoError
                 : DeviceErrorCode.InvalidLinkIdentifier;

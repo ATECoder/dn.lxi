@@ -17,6 +17,7 @@ public class TcpipInstrAddress : AddressBase
     /// <param name="fullResourceName"> The full resource name. </param>
     public TcpipInstrAddress( string fullResourceName ) : base()
     {
+        this.InterfaceDeviceAddress = new VXI11.InsterfaceDeviceStringParser( string.Empty );
         base.Address = this.ParseAddress( fullResourceName )
             ? fullResourceName
             : throw new InvalidOperationException( $"Failed parsing resource name {fullResourceName}" );
@@ -33,13 +34,13 @@ public class TcpipInstrAddress : AddressBase
         if ( result )
         {
             this.Clone( parser );
-            this.InterfaceDeviceAddress = new DeviceAddress( this.Device );
+            this.InterfaceDeviceAddress = new VXI11.InsterfaceDeviceStringParser( this.InterfaceDeviceString );
         }
         return result;
     }
 
     /// <summary>   Gets or sets the interface device address. </summary>
     /// <value> The device address. </value>
-    public DeviceAddress InterfaceDeviceAddress { get; private set; }
+    public VXI11.InsterfaceDeviceStringParser InterfaceDeviceAddress { get; private set; }
 
 }

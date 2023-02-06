@@ -1,3 +1,6 @@
+
+using cc.isr.VXI11;
+
 namespace cc.isr.LXI.Visa;
 
 
@@ -10,7 +13,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
     {
         this.Board = string.Empty;
         this.Protocol = string.Empty;
-        this.Device = string.Empty;
+        this.InterfaceDeviceString = string.Empty;
         this.Host = string.Empty;
         this.Suffix = string.Empty;
         this.Address = string.Empty;
@@ -24,7 +27,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
     {
         this.Board = board;
         this.Host = host;
-        this.Device = device;
+        this.InterfaceDeviceString = device;
     }
 
     /// <summary>   Makes a deep copy of this object. </summary>
@@ -33,7 +36,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
     {
         this.Address = address.Address;
         this.Board = address.Board;
-        this.Device = address.Device;
+        this.InterfaceDeviceString = address.InterfaceDeviceString;
         this.Host = address.Host;
         this.Protocol = address.Protocol;
         this.Suffix = address.Suffix;
@@ -55,12 +58,12 @@ public abstract class AddressBase : IEquatable<AddressBase>
             _ = builder.Append( this.Host );
         }
 
-        if ( !string.IsNullOrEmpty( this.Device ) )
+        if ( !string.IsNullOrEmpty( this.InterfaceDeviceString ) )
         {
             if ( builder.Length > 0 )
                 _ = builder.Append( "::" );
 
-            _ = builder.Append( this.Device );
+            _ = builder.Append( this.InterfaceDeviceString );
         }
 
         if ( !string.IsNullOrEmpty( this.Suffix ) )
@@ -85,10 +88,10 @@ public abstract class AddressBase : IEquatable<AddressBase>
     public bool Equals( AddressBase other )
     {
         return other != null && string.Equals( this.Board, other.Board, StringComparison.OrdinalIgnoreCase ) &&
-               (string.Equals( this.Device, other.Device, StringComparison.OrdinalIgnoreCase ) ||
-                 this.Device is null && other.Device is null ||
-                 this.Device is null && string.Equals( other.Device, $"{DeviceAddress.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) ||
-                 string.Equals( this.Device, $"{DeviceAddress.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) && other.Device is null) &&
+               (string.Equals( this.InterfaceDeviceString, other.InterfaceDeviceString, StringComparison.OrdinalIgnoreCase ) ||
+                 this.InterfaceDeviceString is null && other.InterfaceDeviceString is null ||
+                 this.InterfaceDeviceString is null && string.Equals( other.InterfaceDeviceString, $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) ||
+                 string.Equals( this.InterfaceDeviceString, $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) && other.InterfaceDeviceString is null) &&
                string.Equals( this.Host, other.Host, StringComparison.OrdinalIgnoreCase ) &&
                string.Equals( this.Protocol, other.Protocol, StringComparison.OrdinalIgnoreCase ) &&
                string.Equals( this.Suffix, other.Suffix, StringComparison.OrdinalIgnoreCase );
@@ -116,7 +119,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
 
     /// <summary>   Gets or sets the device address also termed interface device string, e.g., inst0 or gpib0,5 </summary>
     /// <value> The interface device string. </value>
-    public string Device { get; set; }
+    public string InterfaceDeviceString { get; set; }
 
     /// <summary>   Gets or sets the suffix, e.g., INSTR. </summary>
     /// <value> The suffix. </value>

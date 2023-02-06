@@ -163,8 +163,8 @@ namespace cc.isr.LXI.Visa.MSTest
                 // instrAddress = new( address );
                 _ = instrAddress.InterfaceDeviceAddress.IsValid();
             }
-            Assert.IsTrue( instrAddress.InterfaceDeviceAddress.IsValid(), $"{instrAddress.Device} is invalid in {address}" );
-            Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.Device ) ? "empty" : instrAddress.Device)} for {address} " );
+            Assert.IsTrue( instrAddress.InterfaceDeviceAddress.IsValid(), $"{instrAddress.InterfaceDeviceString} is invalid in {address}" );
+            Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.InterfaceDeviceString ) ? "empty" : instrAddress.InterfaceDeviceString)} for {address} " );
         }
 
         /// <summary>   (Unit Test Method) TCP/IP instr address should parse. </summary>
