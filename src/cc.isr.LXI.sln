@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI.Discover", "apps\lxi.discover\cc.isr.LXI.Discover.csproj", "{D59AEB5C-F064-440B-858E-FF0DCB4E076D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xdr", "xdr", "{ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lxi", "lxi", "{86C043E0-7881-4983-9ABB-F4E26483EE68}"
@@ -82,16 +80,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI.Visa.MSTest", "l
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.ClientTester", "..\..\vxi\src\apps\vxi11client.tester\cc.isr.VXI11.ClientTester.csproj", "{4A1885F3-4356-40E9-BEB1-58052355FC88}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.Discover", "..\..\vxi\src\apps\lxi.discover\cc.isr.VXI11.Discover.csproj", "{AF353834-D978-43B2-925D-B8AB682451B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D59AEB5C-F064-440B-858E-FF0DCB4E076D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -144,12 +140,15 @@ Global
 		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF353834-D978-43B2-925D-B8AB682451B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF353834-D978-43B2-925D-B8AB682451B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF353834-D978-43B2-925D-B8AB682451B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF353834-D978-43B2-925D-B8AB682451B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D59AEB5C-F064-440B-858E-FF0DCB4E076D} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
 		{4E793F65-6C68-43ED-8E2F-5C8BDD51A014} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
 		{9AA8ACAF-5F2B-49BD-A56E-962F0B479145} = {ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}
 		{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB} = {ECE00E6D-3C3D-4743-B2F7-DEBE5EF1C941}
@@ -167,6 +166,7 @@ Global
 		{2A96BC48-AB30-4160-A977-AA42E7B417B2} = {8AB47AA3-C7B6-4AC3-902A-7358E9B7E24A}
 		{2C570F06-41CE-44D7-973D-BCD8C408D321} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
 		{4A1885F3-4356-40E9-BEB1-58052355FC88} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{AF353834-D978-43B2-925D-B8AB682451B3} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {090D34DC-03CB-40F0-AB31-DE69AAAD7AA2}
