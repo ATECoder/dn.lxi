@@ -92,7 +92,7 @@ public partial class LxiDevice : IVxi11Device
     }
 
     /// <summary>   Event queue for all listeners interested in ServiceRequested events. </summary>
-    public event EventHandler<cc.isr.VXI11.Vxi11EventArgs>? ServiceRequested;
+    public event EventHandler<cc.isr.VXI11.Vxi11EventArgs>? RequestingService;
 
     /// <summary>   Override this method to handler the VXI-11 event. </summary>
     /// <param name="e">    Event information to send to registered event handlers. </param>
@@ -100,7 +100,7 @@ public partial class LxiDevice : IVxi11Device
     {
         // TODO: add device code here.
 
-        if ( e is not null ) ServiceRequested?.Invoke( this, e );
+        if ( e is not null ) RequestingService?.Invoke( this, e );
 
     }
 
