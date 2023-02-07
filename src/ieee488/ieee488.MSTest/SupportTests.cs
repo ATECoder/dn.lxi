@@ -1,6 +1,6 @@
 using cc.isr.LXI.Logging;
-using cc.isr.LXI.IEEE488.EnumExtensions;
-using cc.isr.LXI.IEEE488.Mock;
+using cc.isr.LXI.EnumExtensions;
+using cc.isr.LXI.Server;
 
 namespace cc.isr.LXI.IEEE488.MSTest;
 
@@ -45,7 +45,7 @@ public class SupportTests
     /// <summary>   Assert should get description. </summary>
     /// <param name="value">                The value. </param>
     /// <param name="expectedDescription">  Information describing the expected. </param>
-    private static void AssertShouldGetDescription( Ieee488OperationType value, string expectedDescription )
+    private static void AssertShouldGetDescription( LxiInstrumentOperationType value, string expectedDescription )
     {
         string actual = value.GetDescription();
         Assert.AreEqual( expectedDescription, actual );
@@ -55,24 +55,24 @@ public class SupportTests
     [TestMethod]
     public void Ieee488OperationTypeShouldGetDescription()
     {
-        AssertShouldGetDescription( Ieee488OperationType.Read, "Read reply from the device." );
+        AssertShouldGetDescription( LxiInstrumentOperationType.Read, "Read reply from the device." );
     }
 
-    /// <summary>   Assert <see cref="int"/> should cast to <see cref="Ieee488OperationType"/>. </summary>
+    /// <summary>   Assert <see cref="int"/> should cast to <see cref="LxiInstrumentOperationType"/>. </summary>
     /// <param name="expected"> The expected value. </param>
     private static void AssertIntShouldCastToIeee488OperationType( int expected )
     {
-        Ieee488OperationType actual = expected.ToIeee488OperationType();
+        LxiInstrumentOperationType actual = expected.ToLxiInstrumentOperationType();
         Assert.AreEqual( expected, ( int ) actual );
     }
 
-    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="Ieee488OperationType"/>. </summary>
+    /// <summary>   (Unit Test Method) <see cref="int"/> should cast to <see cref="LxiInstrumentOperationType"/>. </summary>
     [TestMethod]
     public void IntShouldCastToIeee488OperationType()
     {
         int value = 0;
         int maxValue = 0;
-        foreach ( var enumValue in Enum.GetValues( typeof( Ieee488OperationType ) ) )
+        foreach ( var enumValue in Enum.GetValues( typeof( LxiInstrumentOperationType ) ) )
         {
             value = ( int ) enumValue;
             maxValue = value > maxValue ? value : maxValue;
@@ -85,7 +85,7 @@ public class SupportTests
     /// <param name="expected"> The expected value. </param>
     private static void AssertIntShouldCastToIeee488InterfaceCommand( int expected )
     {
-        InterfaceCommand actual = expected.ToIeee488InterfaceCommand();
+        InterfaceCommand actual = expected.ToInterfaceCommand();
         Assert.AreEqual( expected, ( int ) actual );
     }
 
@@ -108,7 +108,7 @@ public class SupportTests
     /// <param name="expected"> The expected value. </param>
     private static void AssertIntShouldCastToIeee488InterfaceCommandOption( int expected )
     {
-        InterfaceCommandOption actual = expected.ToIeee488InterfaceCommandOption();
+        InterfaceCommandOption actual = expected.ToInterfaceCommandOption();
         Assert.AreEqual( expected, ( int ) actual );
     }
 

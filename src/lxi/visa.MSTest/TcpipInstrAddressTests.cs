@@ -154,16 +154,16 @@ namespace cc.isr.LXI.Visa.MSTest
 
         private static void AssertTcpipInstrAddressShouldParse( string address )
         {
-            cc.isr.LXI.Visa.TcpipInstrAddress instrAddress = new( address );
+            cc.isr.LXI.Visa.TcpipInstrResourceName instrAddress = new( address );
             string actual = instrAddress.BuildAddress();
-            cc.isr.LXI.Visa.TcpipInstrAddress actualAddress = new( actual );
+            cc.isr.LXI.Visa.TcpipInstrResourceName actualAddress = new( actual );
             Assert.IsTrue( actualAddress.Equals( instrAddress ), $"{address} not equals {actual}" );
-            if ( !instrAddress.InterfaceDeviceAddress.IsValid() )
+            if ( !instrAddress.InterfaceDeviceAddressParser.IsValid() )
             {
                 // instrAddress = new( address );
-                _ = instrAddress.InterfaceDeviceAddress.IsValid();
+                _ = instrAddress.InterfaceDeviceAddressParser.IsValid();
             }
-            Assert.IsTrue( instrAddress.InterfaceDeviceAddress.IsValid(), $"{instrAddress.InterfaceDeviceString} is invalid in {address}" );
+            Assert.IsTrue( instrAddress.InterfaceDeviceAddressParser.IsValid(), $"{instrAddress.InterfaceDeviceString} is invalid in {address}" );
             Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.InterfaceDeviceString ) ? "empty" : instrAddress.InterfaceDeviceString)} for {address} " );
         }
 

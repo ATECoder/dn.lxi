@@ -1,10 +1,10 @@
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 
-namespace cc.isr.LXI.IEEE488;
+namespace cc.isr.LXI.Server;
 
 /// <summary>   Interface for a base IEEE488 device. </summary>
-public interface IIeee488Device
+public interface ILxiInstrument
 {
 
     /// <summary>   Clears status: *CLS. </summary>

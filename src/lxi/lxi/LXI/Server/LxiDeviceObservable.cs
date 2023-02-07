@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace cc.isr.LXI.Mock;
+namespace cc.isr.LXI.Server;
 
 public partial class LxiDevice : INotifyPropertyChanged
 {

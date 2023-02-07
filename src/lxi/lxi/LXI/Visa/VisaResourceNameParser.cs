@@ -4,14 +4,14 @@ using cc.isr.VXI11;
 
 namespace cc.isr.LXI.Visa;
 
-/// <summary>   A parser for the address of a VISA resource. </summary>
-public class AddressParser : AddressBase
+/// <summary>   A parser for a VISA resource name. </summary>
+public class VisaResourceNameParser : VisaResourceNameBase
 {
 
     /// <summary>   Constructor. </summary>
     /// <param name="defaultProtocol">  The default protocol. </param>
     /// <param name="defaultSuffix">    The default suffix. </param>
-    public AddressParser( string defaultProtocol, string defaultSuffix ) : base()
+    public VisaResourceNameParser( string defaultProtocol, string defaultSuffix ) : base()
     {
         this.ProtocolDefault = defaultProtocol;
         this.SuffixDefault = defaultSuffix;
@@ -27,7 +27,7 @@ public class AddressParser : AddressBase
     /// <param name="board">            The board. </param>
     /// <param name="host">             The host. </param>
     /// <param name="device">           The device. </param>
-    public AddressParser( string defaultProtocol, string defaultSuffix, string board, string host, string device ) : this( defaultProtocol, defaultSuffix )
+    public VisaResourceNameParser( string defaultProtocol, string defaultSuffix, string board, string host, string device ) : this( defaultProtocol, defaultSuffix )
     {
         this.Board = board;
         this.Host = host;
@@ -50,10 +50,10 @@ public class AddressParser : AddressBase
     private void BuildRegexPattern()
     {
         StringBuilder builder = new();
-        _ = builder.Append( @$"^(?<{nameof( this.Board )}>(?<{nameof( AddressBase.Protocol )}>{this.ProtocolDefault})\d*)" );
-        _ = builder.Append( @$"(::(?<{nameof( AddressBase.Host )}>[^\s:]+))" );
-        _ = builder.Append( @$"(::(?<{nameof( AddressBase.InterfaceDeviceString )}>[^\s:]+(\[.+\])?))" );
-        _ = builder.Append( @$"?(::(?<{nameof( AddressBase.Suffix )}>{this.SuffixDefault}))$" );
+        _ = builder.Append( @$"^(?<{nameof( this.Board )}>(?<{nameof( VisaResourceNameBase.Protocol )}>{this.ProtocolDefault})\d*)" );
+        _ = builder.Append( @$"(::(?<{nameof( VisaResourceNameBase.Host )}>[^\s:]+))" );
+        _ = builder.Append( @$"(::(?<{nameof( VisaResourceNameBase.InterfaceDeviceString )}>[^\s:]+(\[.+\])?))" );
+        _ = builder.Append( @$"?(::(?<{nameof( VisaResourceNameBase.Suffix )}>{this.SuffixDefault}))$" );
         this.RegexPattern = builder.ToString();
         // this.RegexPattern = @$"^(?<Board>(?<Protocol>TCPIP)\d*)(::(?<Host>[^\s:]+))(::(?<Device>[^\s:]+(\[.+\])?))?(::(?<Suffix>INSTR))$";
         // this.RegexPattern = @$"^(?<{nameof( Board )}>(?<{nameof( AddressBase.Protocol )}>{DefaultProtocol})\d*)(::(?<{nameof( AddressBase.Host )}>)>[^\s:]+))(::(?<{nameof( AddressBase.Device )}>[^\s:]+(\[.+\])?))?(::(?<{nameof( AddressBase.Suffix )}>{DefaultSuffix}))$";
@@ -68,12 +68,12 @@ public class AddressParser : AddressBase
         var m = Regex.Match( address, this.RegexPattern, RegexOptions.IgnoreCase );
         if ( m == null ) { return false; }
         this.Address = address;
-        this.Board = m.Groups[nameof( AddressBase.Board )].Value;
-        this.Protocol = m.Groups[nameof( AddressBase.Protocol )].Value;
-        this.Host = m.Groups[nameof( AddressBase.Host )].Value;
-        this.InterfaceDeviceString = m.Groups[nameof( AddressBase.InterfaceDeviceString )].Value;
+        this.Board = m.Groups[nameof( VisaResourceNameBase.Board )].Value;
+        this.Protocol = m.Groups[nameof( VisaResourceNameBase.Protocol )].Value;
+        this.Host = m.Groups[nameof( VisaResourceNameBase.Host )].Value;
+        this.InterfaceDeviceString = m.Groups[nameof( VisaResourceNameBase.InterfaceDeviceString )].Value;
         this.InterfaceDeviceString = string.IsNullOrEmpty( this.InterfaceDeviceString ) ? $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0" : this.InterfaceDeviceString;
-        this.Suffix = m.Groups[nameof( AddressBase.Suffix )].Value;
+        this.Suffix = m.Groups[nameof( VisaResourceNameBase.Suffix )].Value;
         return true;
     }
 }

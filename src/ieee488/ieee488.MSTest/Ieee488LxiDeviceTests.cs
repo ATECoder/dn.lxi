@@ -1,8 +1,7 @@
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 using cc.isr.LXI.Logging;
-using cc.isr.LXI.IEEE488.Mock;
-using cc.isr.LXI.Mock;
+using cc.isr.LXI.Server;
 using cc.isr.VXI11.Server;
 
 namespace cc.isr.LXI.IEEE488.MSTest;
@@ -24,7 +23,7 @@ public class Ieee488LxiDeviceTests
             _classTestContext = context;
             Logger.Writer.LogInformation( $"{_classTestContext.FullyQualifiedTestClassName}.{System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType?.Name}" );
 
-            _mockDevice = new Ieee488Device();
+            _mockDevice = new LxiInstrument();
             _vxi11Device = new LxiDevice( _mockDevice );
 
             int clientId = 1;
@@ -48,7 +47,7 @@ public class Ieee488LxiDeviceTests
         AssertShouldDestroyLink();
     }
 
-    private static IIeee488Device? _mockDevice;
+    private static ILxiInstrument? _mockDevice;
 
     private static IVxi11Device? _vxi11Device;
 
@@ -197,7 +196,7 @@ public class Ieee488LxiDeviceTests
     {
         if ( _mockDevice is null ) return;         AssertShouldCreateLink();
 
-        string command = $"{Ieee488Commands.IDNRead}\n";
+        string command = $"{LxiInstrumentCommands.IDNRead}\n";
 
         DeviceWriteResp writeResp = Send( _vxi11Device, command );
         Assert.AreEqual( DeviceErrorCode.NoError, writeResp.ErrorCode );

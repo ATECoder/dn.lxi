@@ -1,7 +1,7 @@
-namespace cc.isr.LXI.IEEE488;
+namespace cc.isr.LXI.Server;
 
 /// <summary>   Provides the standard IEEE 488 commands. </summary>
-public class Ieee488Commands
+public class LxiInstrumentCommands
 {
 
     /// <summary>   Clears status: *CLS. </summary>

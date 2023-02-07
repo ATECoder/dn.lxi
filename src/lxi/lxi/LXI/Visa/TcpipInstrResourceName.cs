@@ -2,7 +2,7 @@ namespace cc.isr.LXI.Visa;
 
 
 /// <summary>   A TCP/IP VISA INSTR address also termed resource name. </summary>
-public class TcpipInstrAddress : AddressBase
+public class TcpipInstrResourceName : VisaResourceNameBase
 {
 
     /// <summary>   (Immutable) the default protocol. </summary>
@@ -15,9 +15,9 @@ public class TcpipInstrAddress : AddressBase
     /// <exception cref="InvalidOperationException">    Thrown when the requested operation is
     ///                                                 invalid. </exception>
     /// <param name="fullResourceName"> The full resource name. </param>
-    public TcpipInstrAddress( string fullResourceName ) : base()
+    public TcpipInstrResourceName( string fullResourceName ) : base()
     {
-        this.InterfaceDeviceAddress = new VXI11.InsterfaceDeviceStringParser( string.Empty );
+        this.InterfaceDeviceAddressParser = new VXI11.InsterfaceDeviceStringParser( string.Empty );
         base.Address = this.ParseAddress( fullResourceName )
             ? fullResourceName
             : throw new InvalidOperationException( $"Failed parsing resource name {fullResourceName}" );
@@ -29,18 +29,18 @@ public class TcpipInstrAddress : AddressBase
     /// <returns>   True if it succeeds, false if it fails. </returns>
     public bool ParseAddress( string address )
     {
-        AddressParser parser = new( ProtocolDefault, SuffixDefault );
+        VisaResourceNameParser parser = new( ProtocolDefault, SuffixDefault );
         bool result = parser.ParseAddress( address );
         if ( result )
         {
             this.Clone( parser );
-            this.InterfaceDeviceAddress = new VXI11.InsterfaceDeviceStringParser( this.InterfaceDeviceString );
+            this.InterfaceDeviceAddressParser = new VXI11.InsterfaceDeviceStringParser( this.InterfaceDeviceString );
         }
         return result;
     }
 
-    /// <summary>   Gets or sets the interface device address. </summary>
+    /// <summary>   Gets or sets the interface device string parser. </summary>
     /// <value> The device address. </value>
-    public VXI11.InsterfaceDeviceStringParser InterfaceDeviceAddress { get; private set; }
+    public VXI11.InsterfaceDeviceStringParser InterfaceDeviceAddressParser { get; private set; }
 
 }

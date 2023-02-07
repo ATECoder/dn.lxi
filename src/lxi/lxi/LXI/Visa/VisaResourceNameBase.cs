@@ -5,11 +5,11 @@ namespace cc.isr.LXI.Visa;
 
 
 /// <summary>   A VISA resource address base class. </summary>
-public abstract class AddressBase : IEquatable<AddressBase>
+public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 {
 
     /// <summary>   Specialized default constructor for use only by derived class. </summary>
-    protected AddressBase()
+    protected VisaResourceNameBase()
     {
         this.Board = string.Empty;
         this.Protocol = string.Empty;
@@ -23,7 +23,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
     /// <param name="board">    The board. </param>
     /// <param name="host">     The host. </param>
     /// <param name="device">   The device. </param>
-    protected AddressBase( string board, string host, string device ) : this()
+    protected VisaResourceNameBase( string board, string host, string device ) : this()
     {
         this.Board = board;
         this.Host = host;
@@ -32,7 +32,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
 
     /// <summary>   Makes a deep copy of this object. </summary>
     /// <param name="address"> The address of the VISA resource. </param>
-    public void Clone( AddressBase address )
+    public void Clone( VisaResourceNameBase address )
     {
         this.Address = address.Address;
         this.Board = address.Board;
@@ -85,7 +85,7 @@ public abstract class AddressBase : IEquatable<AddressBase>
     /// true if the current object is equal to the <paramref name="other">other</paramref> parameter;
     /// otherwise, false.
     /// </returns>
-    public bool Equals( AddressBase other )
+    public bool Equals( VisaResourceNameBase other )
     {
         return other != null && string.Equals( this.Board, other.Board, StringComparison.OrdinalIgnoreCase ) &&
                (string.Equals( this.InterfaceDeviceString, other.InterfaceDeviceString, StringComparison.OrdinalIgnoreCase ) ||

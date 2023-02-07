@@ -1,10 +1,10 @@
 using System.ComponentModel;
 
-using cc.isr.LXI.Logging;
-using cc.isr.LXI.IEEE488.Mock;
 using cc.isr.ONC.RPC.Portmap;
 using cc.isr.ONC.RPC.Server;
 using cc.isr.VXI11;
+using cc.isr.LXI.Logging;
+using cc.isr.LXI.Server;
 
 namespace cc.isr.LXI.IEEE488.MSTest;
 
@@ -46,14 +46,14 @@ public class Ieee488ServerTests
             } ).ContinueWith( failedTask => Ieee488ServerTests.OnThreadException( new ThreadExceptionEventArgs( failedTask.Exception! ) ),
                                                                                  TaskContinuationOptions.OnlyOnFaulted );
 
-            Logger.Writer.LogInformation( $"{nameof( Ieee488SingleClientMockServer )} waiting running {DateTime.Now:ss.fff}" );
+            Logger.Writer.LogInformation( $"{nameof( LxiSingleClientServer )} waiting running {DateTime.Now:ss.fff}" );
 
             // because the initializing task is not awaited, we need to wait for the server to start here.
 
             if ( !_server.ServerStarted( 2 * Ieee488ServerTests.ServerStartTimeTypical, Ieee488ServerTests.ServerStartLoopDelay ) )
                 throw new InvalidOperationException( "failed starting the ONC/RPC server." );
 
-            Logger.Writer.LogInformation( $"{nameof( Ieee488SingleClientMockServer )} is {(_server.Running ? "running" : "idle")}  {DateTime.Now:ss.fff}" );
+            Logger.Writer.LogInformation( $"{nameof( LxiSingleClientServer )} is {(_server.Running ? "running" : "idle")}  {DateTime.Now:ss.fff}" );
         }
         catch ( Exception ex )
         {
@@ -69,7 +69,7 @@ public class Ieee488ServerTests
     [ClassCleanup]
     public static void CleanupFixture()
     {
-        Ieee488SingleClientMockServer? server = _server;
+        LxiSingleClientServer? server = _server;
         if ( server is not null )
         {
             try
@@ -93,8 +93,8 @@ public class Ieee488ServerTests
     private static readonly string? _ipv4Address = "127.0.0.1";
 
     private static readonly string _identity = "Ieee488 mock device";
-    private static Ieee488SingleClientMockServer? _server;
-    private static Ieee488Device? _device;
+    private static LxiSingleClientServer? _server;
+    private static LxiInstrument? _device;
 
     internal static void OnThreadException( ThreadExceptionEventArgs e )
     {
@@ -104,7 +104,7 @@ public class Ieee488ServerTests
     internal static void OnThreadException( object? sender, ThreadExceptionEventArgs e )
     {
         string name = "unknown";
-        if ( sender is Ieee488SingleClientMockServer ) name = nameof( Ieee488SingleClientMockServer );
+        if ( sender is LxiSingleClientServer ) name = nameof( LxiSingleClientServer );
         if ( sender is OncRpcServerStubBase ) name = nameof( OncRpcServerStubBase );
 
         Logger.Writer.LogError( $"{name} encountered an exception during an asynchronous operation", e.Exception );
@@ -112,23 +112,23 @@ public class Ieee488ServerTests
 
     private static void OnServerPropertyChanged( object? sender, PropertyChangedEventArgs e )
     {
-        if ( sender is not Ieee488SingleClientMockServer ) { return; }
+        if ( sender is not LxiSingleClientServer ) { return; }
         switch ( e.PropertyName )
         {
-            case nameof( Ieee488SingleClientMockServer.ReadMessage ):
-                Logger.Writer.LogInformation( ( ( Ieee488SingleClientMockServer ) sender).ReadMessage );
+            case nameof( LxiSingleClientServer.ReadMessage ):
+                Logger.Writer.LogInformation( ( ( LxiSingleClientServer ) sender).ReadMessage );
                 break;
-            case nameof( Ieee488SingleClientMockServer.WriteMessage ):
-                Logger.Writer.LogInformation( (( Ieee488SingleClientMockServer ) sender).WriteMessage );
+            case nameof( LxiSingleClientServer.WriteMessage ):
+                Logger.Writer.LogInformation( (( LxiSingleClientServer ) sender).WriteMessage );
                 break;
-            case nameof( Ieee488SingleClientMockServer.PortNumber ):
-                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( Ieee488SingleClientMockServer ) sender).PortNumber}" );
+            case nameof( LxiSingleClientServer.PortNumber ):
+                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( LxiSingleClientServer ) sender).PortNumber}" );
                 break;
-            case nameof( Ieee488SingleClientMockServer.IPv4Address ):
-                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( Ieee488SingleClientMockServer ) sender).IPv4Address}" );
+            case nameof( LxiSingleClientServer.IPv4Address ):
+                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( LxiSingleClientServer ) sender).IPv4Address}" );
                 break;
-            case nameof( Ieee488SingleClientMockServer.Running ):
-                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( Ieee488SingleClientMockServer ) sender).Running}" );
+            case nameof( LxiSingleClientServer.Running ):
+                Logger.Writer.LogInformation( $"{e.PropertyName} set to {(( LxiSingleClientServer ) sender).Running}" );
                 break;
         }
     }
@@ -149,7 +149,7 @@ public class Ieee488ServerTests
         vxi11Client.ThreadExceptionOccurred += OnThreadException;
 
         string identity = Ieee488ServerTests._identity;
-        string command = Ieee488Commands.IDNRead;
+        string command = LxiInstrumentCommands.IDNRead;
         vxi11Client.Connect( ipv4Address,
                                InsterfaceDeviceStringParser.BuildInterfaceDeviceString( InsterfaceDeviceStringParser.GenericInterfaceFamily, 0 ) );
 

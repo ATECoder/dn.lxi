@@ -6,34 +6,35 @@ using cc.isr.ONC.RPC.Client;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 using cc.isr.LXI.Logging;
+using cc.isr.LXI.Server;
 
-namespace cc.isr.LXI.IEEE488.Mock;
+namespace cc.isr.LXI.Server;
 
 /// <summary>   An IEEE488 Mock server capable of serving a single client. </summary>
 /// <remarks>   
 /// Closing a client connected to the Mock local server no longer throws an exception when destroying the link.
 /// </remarks>
-public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
+public partial class LxiSingleClientServer : CoreChannelServerBase
 {
 
     #region " construction and cleanup "
 
     /// <summary>   Default constructor. </summary>
-    public Ieee488SingleClientMockServer() : this( null, 0 )
+    public LxiSingleClientServer() : this( null, 0 )
     {
     }
 
     /// <summary>   Constructor. </summary>
     /// <param name="port"> The port number where the server will wait for incoming calls. </param>
-    public Ieee488SingleClientMockServer( int port ) : this( null, port )
+    public LxiSingleClientServer( int port ) : this( null, port )
     {
     }
 
-    public Ieee488SingleClientMockServer( IPAddress? bindAddr, int port ) : this( new Ieee488Device(), bindAddr, port )
+    public LxiSingleClientServer( IPAddress? bindAddr, int port ) : this( new LxiInstrument(), bindAddr, port )
     {
     }
 
-    public Ieee488SingleClientMockServer( Ieee488Device device ) : this( device, null, 0 )
+    public LxiSingleClientServer( LxiInstrument device ) : this( device, null, 0 )
     {
     }
 
@@ -41,7 +42,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
     /// <param name="device">   current device. </param>
     /// <param name="bindAddr"> The local Internet Address the server will bind to. </param>
     /// <param name="port">     The port number where the server will wait for incoming calls. </param>
-    public Ieee488SingleClientMockServer( Ieee488Device device, IPAddress? bindAddr, int port ) : base( bindAddr ?? IPAddress.Any, port )
+    public LxiSingleClientServer( LxiInstrument device, IPAddress? bindAddr, int port ) : base( bindAddr ?? IPAddress.Any, port )
     {
         this._device = device;
         this.InterfaceDeviceString = string.Empty;
@@ -54,7 +55,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
         this.MaxReceiveLength = VXI11.Client.Vxi11Client.MaxReceiveLengthDefault;
         this.InterruptAddress = IPAddress.Any;
         this.DeviceLink = new DeviceLink();
-        this._interfaceDeviceAddress = new( string.Empty ) ;
+        this._interfaceDeviceAddress = new( string.Empty );
     }
 
     /// <summary>
@@ -221,17 +222,14 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
     protected virtual void StopAbortServer( int timeout = 500, int loopDelay = 5 )
     {
         if ( this.AbortServer is not null && this.AbortServer.Running )
-        {
             try
             {
                 this.AbortServer.AbortRequested -= this.HandleAbortRequest;
                 this.AbortServer.StopRpcProcessing();
                 DateTime endT = DateTime.Now.AddMilliseconds( timeout );
                 while ( endT > DateTime.Now && this.AbortServer.Running )
-                {
                     // allow the thread time to address the request
                     Task.Delay( loopDelay ).Wait();
-                }
             }
             catch ( Exception )
             {
@@ -242,7 +240,6 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
                 this.AbortServer.Close();
                 this.AbortServer = null;
             }
-        }
     }
 
     /// <summary>   Disables (stops) the abort server asynchronously. </summary>
@@ -335,9 +332,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
             this.InterruptClient.Client!.IOTimeout = this.InterruptIOTimeout;
         }
         if ( this.InterruptEnabled )
-        {
             this.InterruptClient?.DeviceIntrSrq( this._interruptHandle );
-        }
     }
 
     #endregion
@@ -388,7 +383,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
 
     /// <summary>   The current operation instruction type. </summary>
     /// <value> The type of the current operation. </value>
-    public Ieee488OperationType CurrentOperationType { get; private set; } = Ieee488OperationType.None;
+    public LxiInstrumentOperationType CurrentOperationType { get; private set; } = LxiInstrumentOperationType.None;
 
     private string _interfaceDeviceString;
     /// <summary>   Gets or sets the interface device string. </summary>
@@ -427,7 +422,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
     /// <summary>
     /// current device
     /// </summary>
-    private IIeee488Device? _device = null;
+    private ILxiInstrument? _device = null;
 
     /// <summary>
     /// Thread synchronization locks
@@ -939,7 +934,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
     public override DeviceReadResp DeviceRead( DeviceReadParms deviceReadParameters )
     {
         DeviceReadResp readRes = new();
-        if ( this.CurrentOperationType == Ieee488OperationType.None || this.CurrentOperationType == Ieee488OperationType.Write )
+        if ( this.CurrentOperationType == LxiInstrumentOperationType.None || this.CurrentOperationType == LxiInstrumentOperationType.Write )
         {
             this._readBuffer = Array.Empty<byte>();
             _ = this._asyncLocker.Reset();
@@ -952,13 +947,13 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
             return readRes;
         }
 
-        if ( this.CurrentOperationType == Ieee488OperationType.Read )
+        if ( this.CurrentOperationType == LxiInstrumentOperationType.Read )
         {
             readRes.SetData( this._readBuffer );
             readRes.ErrorCode = DeviceErrorCode.NoError;
             readRes.Reason = DeviceReadReasons.RequestCountIndicator | DeviceReadReasons.TermCharIndicator;
         }
-        this.CurrentOperationType = Ieee488OperationType.None; //Reset the action type
+        this.CurrentOperationType = LxiInstrumentOperationType.None; //Reset the action type
         return readRes;
     }
 
@@ -1064,7 +1059,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
             this._readBuffer = Array.Empty<byte>();
 
             // check if we have a query message (read) or a write message:
-            this.CurrentOperationType = spciCommand[^1] == '?' ? Ieee488OperationType.Read : Ieee488OperationType.Write;
+            this.CurrentOperationType = spciCommand[^1] == '?' ? LxiInstrumentOperationType.Read : LxiInstrumentOperationType.Write;
 
             // get the command arguments
             if ( scpiCmdElements.Length >= 2 )
@@ -1072,32 +1067,32 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
 
             // find the mock server method that corresponds to the SCPI command.
             MethodInfo? method = this._device!.GetType().GetMethods().ToList().Find( p => {
-                var att = p.GetCustomAttribute( typeof( Ieee488Attribute ) );
-                if ( att == null || att is not Ieee488Attribute ) return false;
-                Ieee488Attribute scpiAtt = ( Ieee488Attribute ) att;
+                var att = p.GetCustomAttribute( typeof( LxiInstrumentOperationAttribute ) );
+                if ( att == null || att is not LxiInstrumentOperationAttribute ) return false;
+                LxiInstrumentOperationAttribute scpiAtt = ( LxiInstrumentOperationAttribute ) att;
 
                 // return success if the command matches the method attribute
-                return String.Equals( scpiAtt.Content, spciCommand, StringComparison.OrdinalIgnoreCase );
+                return string.Equals( scpiAtt.Content, spciCommand, StringComparison.OrdinalIgnoreCase );
             } );
 
             if ( method is not null )
             {
-                Ieee488Attribute scpiAtt = ( Ieee488Attribute ) method.GetCustomAttribute( typeof( Ieee488Attribute ) )!;
+                LxiInstrumentOperationAttribute scpiAtt = ( LxiInstrumentOperationAttribute ) method.GetCustomAttribute( typeof( LxiInstrumentOperationAttribute ) )!;
                 try
                 {
                     object? res = null;
                     switch ( scpiAtt.OperationType )
                     {
-                        case Ieee488OperationType.None:
+                        case LxiInstrumentOperationType.None:
                             Logger.Writer.LogMemberWarning( $"The attribute of method {method} is marked incorrectly as {scpiAtt.OperationType}。" );
                             break;
-                        case Ieee488OperationType.Write:
+                        case LxiInstrumentOperationType.Write:
                             this.WriteMessage = scpiCommands[n];
                             // invoke the corresponding method
                             res = method.Invoke( this._device, scpiArgs );
                             result.ErrorCode = DeviceErrorCode.NoError;
                             break;
-                        case Ieee488OperationType.Read://Query instructions
+                        case LxiInstrumentOperationType.Read://Query instructions
                             this.WriteMessage = scpiCommands[n];
                             res = method.Invoke( this._device, scpiArgs );
                             if ( res is not null )
@@ -1126,7 +1121,7 @@ public partial class Ieee488SingleClientMockServer : CoreChannelServerBase
             {
                 Logger.Writer.LogMemberWarning( $"No method found： {spciCommand}" );
                 result.ErrorCode = DeviceErrorCode.SyntaxError; // The instruction is incorrect or undefined
-                this.CurrentOperationType = Ieee488OperationType.None;
+                this.CurrentOperationType = LxiInstrumentOperationType.None;
             }
             _ = this._asyncLocker.Set();//Reset block
         }

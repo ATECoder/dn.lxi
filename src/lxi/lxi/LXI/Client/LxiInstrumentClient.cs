@@ -3,10 +3,10 @@ using System.Net;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 
-namespace cc.isr.LXI.IEEE488;
+namespace cc.isr.LXI.Client;
 
-/// <summary>   An IEEE 488 instrument. </summary>
-public class Ieee488Instrument : VXI11.Client.Vxi11Client
+/// <summary>   An LXI instrument client. </summary>
+public class LxiInstrumentClient : VXI11.Client.Vxi11Client
 {
 
     #region " construction and cleanup "
@@ -91,7 +91,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Instrument.CreateInterruptChannel )} command", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInstrumentClient.CreateInterruptChannel )} command", reply.ErrorCode );
         else
             await this.EnableInterruptServerAsync();
     }
@@ -114,7 +114,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Instrument.DestroyInterruptChannel )} command", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInstrumentClient.DestroyInterruptChannel )} command", reply.ErrorCode );
     }
 
     /// <summary>   Enables/disables sending of service requests. </summary>
@@ -142,7 +142,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Instrument.EnableSrq )} command.", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInstrumentClient.EnableSrq )} command.", reply.ErrorCode );
     }
 
     /// <summary>   Send local command. </summary>
@@ -156,7 +156,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Instrument.Local )} command", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInstrumentClient.Local )} command", reply.ErrorCode );
     }
 
     /// <summary>   Send remote command. </summary>
@@ -170,7 +170,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Instrument.Remote )} command", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInstrumentClient.Remote )} command", reply.ErrorCode );
     }
 
     /// <summary>   Reads status byte. </summary>
@@ -184,7 +184,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
         return reply is null
             ? throw new DeviceException( DeviceErrorCode.IOError )
             : reply.ErrorCode != DeviceErrorCode.NoError
-                ? throw new DeviceException( $"; failed {nameof( Ieee488Instrument.ReadStatusByte )} reading the status byte.", reply.ErrorCode )
+                ? throw new DeviceException( $"; failed {nameof( LxiInstrumentClient.ReadStatusByte )} reading the status byte.", reply.ErrorCode )
                 : reply.Stb;
     }
 
@@ -212,7 +212,7 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
     /// <param name="e">        VXI-11 event information. </param>
     private void HandleServiceRequest( object sender, Vxi11EventArgs e )
     {
-        if ( e.ServiceRequestCodec.ClientId == this.ClientId ) { this.OnServiceRequested( e ); }
+        if ( e.ServiceRequestCodec.ClientId == this.ClientId ) this.OnServiceRequested( e );
     }
 
     protected InterruptChannelServer? InterruptServer { get; set; }
@@ -276,7 +276,6 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
     {
         InterruptChannelServer? interruptServer = this.InterruptServer;
         if ( interruptServer is not null && interruptServer.Running )
-        {
             try
             {
                 try
@@ -286,13 +285,11 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
                     DateTime startTime = DateTime.Now;
                     DateTime endT = DateTime.Now.AddMilliseconds( timeout );
                     while ( endT > DateTime.Now && interruptServer.Running )
-                    {
                         // allow the task time to address the request
                         Task.Delay( loopDelay ).Wait();
-                    }
                     if ( interruptServer.Running )
                         throw new InvalidOperationException(
-                            $"{nameof( Ieee488Instrument )}.{nameof( StopInterruptServer )} failed stopping {nameof( InterruptChannelServer )} in {(DateTime.Now - startTime).TotalMilliseconds:0}" );
+                            $"{nameof( LxiInstrumentClient )}.{nameof( StopInterruptServer )} failed stopping {nameof( InterruptChannelServer )} in {(DateTime.Now - startTime).TotalMilliseconds:0}" );
                 }
                 catch { throw; }
                 finally
@@ -308,7 +305,6 @@ public class Ieee488Instrument : VXI11.Client.Vxi11Client
             {
                 this.InterruptServer = null;
             }
-        }
     }
 
     /// <summary>   Disables (stops) the Interrupt server task. </summary>

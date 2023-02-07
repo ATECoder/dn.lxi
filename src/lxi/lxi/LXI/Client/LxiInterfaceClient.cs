@@ -2,8 +2,8 @@ using cc.isr.VXI11.Codecs;
 
 using cc.isr.VXI11;
 
-namespace cc.isr.LXI.IEEE488;
-public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
+namespace cc.isr.LXI.Client;
+public class LxiInterfaceClient : VXI11.Client.Vxi11Client
 {
 
     #region " construction and cleanup "
@@ -37,7 +37,7 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Interface.SendCommand )} command.", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInterfaceClient.SendCommand )} command.", reply.ErrorCode );
         return reply.GetDataOut();
     }
 
@@ -51,20 +51,13 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
         List<byte> data = new( new byte[] { ( byte ) (this.BusAddress | ( byte ) GpibCommandArgument.TalkAddress), ( byte ) GpibCommandArgument.Unlisten } );
 
         foreach ( byte[] addr in addressList )
-        {
             if ( addr is not null && addr.Length > 0 )
-            {
                 for ( int i = 0; i < addr.Length; i++ )
                 {
                     if ( addr[i] < 0 || addr[i] > 30 )
-                    {
                         throw new DeviceException( $"; {nameof( CreateSetup )} failed because {i}-th address {addr[i]} is an invalid bus address.", DeviceErrorCode.InvalidAddress );
-                    }
                     data.Add( ( byte ) (addr[i] | ( byte ) (i == 0 ? GpibCommandArgument.ListenAddress : GpibCommandArgument.SecondaryAddress)) );
                 }
-            }
-
-        }
         return data.ToArray();
     }
 
@@ -235,9 +228,7 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
         if ( this.DeviceLink is null || this.CoreClient is null ) return false;
 
         if ( addr < 0 || addr > 30 )
-        {
             throw new DeviceException( $"; {nameof( PassControl )} failed because {addr} is an invalid bus address.", DeviceErrorCode.ParameterError );
-        }
 
         int reply = this.CoreClient.DeviceDoCmd( this.DeviceLink, DeviceOperationFlags.None, this.LockTimeout, this.IOTimeout,
                                                            ( int ) InterfaceCommand.BusAddress, 4, addr );
@@ -261,7 +252,7 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
         if ( reply is null )
             throw new DeviceException( DeviceErrorCode.IOError );
         else if ( reply.ErrorCode != DeviceErrorCode.NoError )
-            throw new DeviceException( $"; failed sending the {nameof( Ieee488Interface.SendInterfaceClear )} command.", reply.ErrorCode );
+            throw new DeviceException( $"; failed sending the {nameof( LxiInterfaceClient.SendInterfaceClear )} command.", reply.ErrorCode );
         return reply.GetDataOut();
     }
 
@@ -294,9 +285,7 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
                 };
 
                 if ( addr < 0 || addr > 30 )
-                {
                     throw new DeviceException( $"; {nameof( FindListeners )} failed because {addr} is an invalid bus address.", DeviceErrorCode.InvalidAddress );
-                }
                 cmd.Add( ( byte ) (addr | ( byte ) GpibCommandArgument.ListenAddress) );
 
                 _ = this.SendCommand( cmd.ToArray() );
@@ -306,9 +295,7 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
                 Task.Delay( readAfterWriteDelay ).Wait();
 
                 if ( 0 != this.ReadNdacLine() )
-                {
                     found.Add( (addr, 0) );
-                }
                 else
                 {
                     // check for listener at any sub-address
@@ -320,15 +307,12 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
                     };
 
                     foreach ( var sa in Enumerable.Range( 0, 31 ) )
-                    {
                         cmd.Add( ( byte ) (sa | ( byte ) GpibCommandArgument.SecondaryAddress) );
-                    }
                     _ = this.SendCommand( cmd.ToArray() );
                     _ = this.SetAtnLine( false );
                     Task.Delay( readAfterWriteDelay ).Wait();
 
                     if ( 0 != this.ReadNdacLine() )
-                    {
                         // find specific sub-address
                         foreach ( var sa in Enumerable.Range( 0, 31 ) )
                         {
@@ -347,7 +331,6 @@ public class Ieee488Interface : cc.isr.VXI11.Client.Vxi11Client
                             if ( 0 != this.ReadNdacLine() )
                                 found.Add( (addr, sa) );
                         }
-                    }
                 }
             }
             this.Unlock();

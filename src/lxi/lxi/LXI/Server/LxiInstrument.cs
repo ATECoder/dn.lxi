@@ -2,18 +2,19 @@ using System.Reflection;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 using cc.isr.LXI.Logging;
+using cc.isr.LXI.Server;
 
-namespace cc.isr.LXI.IEEE488.Mock;
+namespace cc.isr.LXI.Server;
 
 /// <summary>   An IEEE 488 Mock device. </summary>
-public partial class Ieee488Device : IIeee488Device
+public partial class LxiInstrument : ILxiInstrument
 {
 
     #region " construction and cleanup "
 
     /// <summary>   Constructor. </summary>
     /// <param name="identity"> (Optional) Device identification string. </param>
-    public Ieee488Device( string identity = "INTEGRATED SCIENTIFIC RESOURCES,MODEL IEEE488Mock,001,1.0.8434" )
+    public LxiInstrument( string identity = "INTEGRATED SCIENTIFIC RESOURCES,MODEL IEEE488Mock,001,1.0.8434" )
     {
         this.Identity = identity;
         this.WriteMessage = string.Empty;
@@ -34,19 +35,19 @@ public partial class Ieee488Device : IIeee488Device
     /// </summary>
     public string Identity { get; set; }
 
-    /// <summary>   Clears status: <see cref="Ieee488Commands.CLS"/>. </summary>
+    /// <summary>   Clears status: <see cref="LxiInstrumentCommands.CLS"/>. </summary>
     /// <remarks>
     /// Clear Status Command. Clears the event registers in all register groups. Also clears the
     /// error queue.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.CLS, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.CLS, LxiInstrumentOperationType.Write )]
     public bool CLS()
     {
         return true;
     }
 
-    /// <summary>   Enables Standard Event Status: <see cref="Ieee488Commands.ESE"/>. </summary>
+    /// <summary>   Enables Standard Event Status: <see cref="LxiInstrumentCommands.ESE"/>. </summary>
     /// <remarks>
     /// Enables bits in the enable register for the Standard Event Register group. The selected bits
     /// are then reported to bit 5 of the Status Byte Register. Accepts the decimal sum of the bits
@@ -55,7 +56,7 @@ public partial class Ieee488Device : IIeee488Device
     /// (value 16) and bit 5 (value 32) in the enable register.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.ESE, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.ESE, LxiInstrumentOperationType.Write )]
     public bool ESE()
     {
         throw new NotImplementedException();
@@ -64,13 +65,13 @@ public partial class Ieee488Device : IIeee488Device
     /// <summary>
     /// Reads Standard Event Status: *ESE?
     /// </summary>
-    [Ieee488( Ieee488Commands.ESERead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.ESERead, LxiInstrumentOperationType.Read )]
     public string ESERead()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Standard Event Status Register Query: <see cref="Ieee488Commands.ESRRead"/>. </summary>
+    /// <summary>   Standard Event Status Register Query: <see cref="LxiInstrumentCommands.ESRRead"/>. </summary>
     /// <remarks>
     /// Queries the event register for the Standard Event Register group. Register is read-only; bits
     /// not cleared when read. Any or all conditions can be reported to the Standard Event summary
@@ -78,21 +79,21 @@ public partial class Ieee488Device : IIeee488Device
     /// register using *ESE. Once a bit is set, it remains set until cleared by this query or *CLS.
     /// </remarks>
     /// <returns>   A string. </returns>
-    [Ieee488( Ieee488Commands.ESRRead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.ESRRead, LxiInstrumentOperationType.Read )]
     public string ESRRead()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Reads the device identity string: <see cref="Ieee488Commands.IDNRead"/></summary>
+    /// <summary>   Reads the device identity string: <see cref="LxiInstrumentCommands.IDNRead"/></summary>
     /// <returns>   A string. </returns>
-    [Ieee488( Ieee488Commands.IDNRead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.IDNRead, LxiInstrumentOperationType.Read )]
     public string IDNRead()
     {
         return this.Identity;
     }
 
-    /// <summary>   Operation completion instruction: <see cref="Ieee488Commands.OPC"/>. </summary>
+    /// <summary>   Operation completion instruction: <see cref="LxiInstrumentCommands.OPC"/>. </summary>
     /// <remarks>
     /// Sets "Operation Complete" (bit 0) in the Standard Event register at the completion of the
     /// current operation. The purpose of this command is to synchronize your application with the
@@ -104,13 +105,13 @@ public partial class Ieee488Device : IIeee488Device
     /// after an *OPC? until it has responded. In this way an explicit polling loop can be avoided.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.OPC, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.OPC, LxiInstrumentOperationType.Write )]
     public bool OPC()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Reads the operation completion status: <see cref="Ieee488Commands.OPCRead"/> </summary>
+    /// <summary>   Reads the operation completion status: <see cref="LxiInstrumentCommands.OPCRead"/> </summary>
     /// <remarks>
     /// Returns 1 to the output buffer after all pending commands complete. : The purpose of this
     /// command is to synchronize your application with the instrument. Other commands cannot be
@@ -121,26 +122,26 @@ public partial class Ieee488Device : IIeee488Device
     /// wait for the response.
     /// </remarks>
     /// <returns>   Returns 1 when all previous commands complete. </returns>
-    [Ieee488( Ieee488Commands.OPCRead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.OPCRead, LxiInstrumentOperationType.Read )]
     public string OPCRead()
     {
         return "1";
     }
 
-    /// <summary>   Resets the device: <see cref="Ieee488Commands.RST"/>. </summary>
+    /// <summary>   Resets the device: <see cref="LxiInstrumentCommands.RST"/>. </summary>
     /// <remarks>
     /// Resets instrument to factory default state, independent of MEMory:STATe:RECall:AUTO setting.
     /// Does not affect stored instrument states, stored arbitrary waveforms, or I/O settings; these
     /// are stored in non-volatile memory. Aborts a sweep or burst in progress.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.RST, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.RST, LxiInstrumentOperationType.Write )]
     public bool RST()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Enables the service request events: <see cref="Ieee488Commands.SRE"/>. </summary>
+    /// <summary>   Enables the service request events: <see cref="LxiInstrumentCommands.SRE"/>. </summary>
     /// <remarks>
     /// This command enables bits in the enable register for the Status Byte Register group.
     /// Parameters consists of the decimal sum of the bits in the register; default 0. For example,
@@ -156,15 +157,15 @@ public partial class Ieee488Device : IIeee488Device
     /// cycles. Status Byte enable register is not cleared by *RST.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.SRE, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.SRE, LxiInstrumentOperationType.Write )]
     public bool SRE()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Reads the service request enabled status: <see cref="Ieee488Commands.SRERead"/> </summary>
+    /// <summary>   Reads the service request enabled status: <see cref="LxiInstrumentCommands.SRERead"/> </summary>
     /// <returns>   A string. </returns>
-    [Ieee488( Ieee488Commands.SRERead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.SRERead, LxiInstrumentOperationType.Read )]
     public string SRERead()
     {
         throw new NotImplementedException();
@@ -173,7 +174,7 @@ public partial class Ieee488Device : IIeee488Device
     /// <summary>
     /// Read the status byte: *STB?
     /// </summary>
-    [Ieee488( Ieee488Commands.STBRead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.STBRead, LxiInstrumentOperationType.Read )]
     public string STBRead()
     {
         throw new NotImplementedException();
@@ -186,25 +187,25 @@ public partial class Ieee488Device : IIeee488Device
     /// BUS).
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.TRG, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.TRG, LxiInstrumentOperationType.Write )]
     public bool TRG()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Runs a self test and reads its status: <see cref="Ieee488Commands.TSTRead"/>. </summary>
+    /// <summary>   Runs a self test and reads its status: <see cref="LxiInstrumentCommands.TSTRead"/>. </summary>
     /// <remarks>
     /// Self-Test Query. Performs a complete instrument self-test. If test fails, one or more error
     /// messages will provide additional information. Use SYSTem:ERRor? to read error queue.
     /// </remarks>
     /// <returns>   Returns +0 (pass) or +1 (one or more tests failed). </returns>
-    [Ieee488( Ieee488Commands.TSTRead, Ieee488OperationType.Read )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.TSTRead, LxiInstrumentOperationType.Read )]
     public string TSTRead()
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>   Wait until all pending operations complete. <see cref="Ieee488Commands.WAI"/>. </summary>
+    /// <summary>   Wait until all pending operations complete. <see cref="LxiInstrumentCommands.WAI"/>. </summary>
     /// <remarks>
     /// Configures the instrument to wait for all pending operations to complete before executing any
     /// additional commands over the interface. For example, you can use this with the *TRG command
@@ -212,7 +213,7 @@ public partial class Ieee488Device : IIeee488Device
     /// *TRG;*WAI;*TRG.
     /// </remarks>
     /// <returns>   True if it succeeds, false if it fails. </returns>
-    [Ieee488( Ieee488Commands.WAI, Ieee488OperationType.Write )]
+    [LxiInstrumentOperation( LxiInstrumentCommands.WAI, LxiInstrumentOperationType.Write )]
     public bool WAI()
     {
         throw new NotImplementedException();
@@ -314,7 +315,7 @@ public partial class Ieee488Device : IIeee488Device
 
     /// <summary>   The current operation instruction type. </summary>
     /// <value> The type of the current operation. </value>
-    public IEEE488.Mock.Ieee488OperationType CurrentOperationType { get; set; } = IEEE488.Mock.Ieee488OperationType.None;
+    public LxiInstrumentOperationType CurrentOperationType { get; set; } = LxiInstrumentOperationType.None;
 
     /// <summary>   Read a message. </summary>
     /// <remarks>
@@ -368,7 +369,7 @@ public partial class Ieee488Device : IIeee488Device
     public DeviceReadResp DeviceRead( DeviceReadParms deviceReadParameters )
     {
         DeviceReadResp readRes = new();
-        if ( this.CurrentOperationType == IEEE488.Mock.Ieee488OperationType.None || this.CurrentOperationType == IEEE488.Mock.Ieee488OperationType.Write )
+        if ( this.CurrentOperationType == LxiInstrumentOperationType.None || this.CurrentOperationType == LxiInstrumentOperationType.Write )
         {
             this._readBuffer = Array.Empty<byte>();
             _ = this._asyncLocker.Reset();
@@ -381,13 +382,13 @@ public partial class Ieee488Device : IIeee488Device
             return readRes;
         }
 
-        if ( this.CurrentOperationType == IEEE488.Mock.Ieee488OperationType.Read )
+        if ( this.CurrentOperationType == LxiInstrumentOperationType.Read )
         {
             readRes.SetData( this._readBuffer );
             readRes.ErrorCode = DeviceErrorCode.NoError;
             readRes.Reason = DeviceReadReasons.RequestCountIndicator | DeviceReadReasons.TermCharIndicator;
         }
-        this.CurrentOperationType = IEEE488.Mock.Ieee488OperationType.None; //Reset the action type
+        this.CurrentOperationType = LxiInstrumentOperationType.None; //Reset the action type
         return readRes;
     }
 
@@ -493,7 +494,7 @@ public partial class Ieee488Device : IIeee488Device
             this._readBuffer = Array.Empty<byte>();
 
             // check if we have a query message (read) or a write message:
-            this.CurrentOperationType = spciCommand[^1] == '?' ? IEEE488.Mock.Ieee488OperationType.Read : IEEE488.Mock.Ieee488OperationType.Write;
+            this.CurrentOperationType = spciCommand[^1] == '?' ? LxiInstrumentOperationType.Read : LxiInstrumentOperationType.Write;
 
             // get the command arguments
             if ( scpiCmdElements.Length >= 2 )
@@ -501,9 +502,9 @@ public partial class Ieee488Device : IIeee488Device
 
             // find the mock server method that corresponds to the SCPI command.
             MethodInfo? method = this.GetType().GetMethods().ToList().Find( p => {
-                var att = p.GetCustomAttribute( typeof( IEEE488.Mock.Ieee488Attribute ) );
-                if ( att == null || att is not IEEE488.Mock.Ieee488Attribute ) return false;
-                IEEE488.Mock.Ieee488Attribute scpiAtt = ( IEEE488.Mock.Ieee488Attribute ) att;
+                var att = p.GetCustomAttribute( typeof( LxiInstrumentOperationAttribute ) );
+                if ( att == null || att is not LxiInstrumentOperationAttribute ) return false;
+                LxiInstrumentOperationAttribute scpiAtt = ( LxiInstrumentOperationAttribute ) att;
 
                 // return success if the command matches the method attribute
                 return String.Equals( scpiAtt.Content, spciCommand, StringComparison.OrdinalIgnoreCase );
@@ -511,22 +512,22 @@ public partial class Ieee488Device : IIeee488Device
 
             if ( method is not null )
             {
-                IEEE488.Mock.Ieee488Attribute scpiAtt = ( IEEE488.Mock.Ieee488Attribute ) method.GetCustomAttribute( typeof( IEEE488.Mock.Ieee488Attribute ) )!;
+                LxiInstrumentOperationAttribute scpiAtt = ( LxiInstrumentOperationAttribute ) method.GetCustomAttribute( typeof( LxiInstrumentOperationAttribute ) )!;
                 try
                 {
                     object? res = null;
                     switch ( scpiAtt.OperationType )
                     {
-                        case IEEE488.Mock.Ieee488OperationType.None:
+                        case LxiInstrumentOperationType.None:
                             Logger.Writer.LogMemberWarning( $"The attribute of method {method} is marked incorrectly as {scpiAtt.OperationType}。" );
                             break;
-                        case IEEE488.Mock.Ieee488OperationType.Write:
+                        case LxiInstrumentOperationType.Write:
                             this.WriteMessage = scpiCommands[n];
                             // invoke the corresponding method
                             res = method.Invoke( this, scpiArgs );
                             result.ErrorCode = DeviceErrorCode.NoError;
                             break;
-                        case IEEE488.Mock.Ieee488OperationType.Read://Query instructions
+                        case LxiInstrumentOperationType.Read://Query instructions
                             this.WriteMessage = scpiCommands[n];
                             res = method.Invoke( this, scpiArgs );
                             if ( res is not null )
@@ -555,7 +556,7 @@ public partial class Ieee488Device : IIeee488Device
             {
                 Logger.Writer.LogMemberWarning( $"No method found： {spciCommand}" );
                 result.ErrorCode = DeviceErrorCode.SyntaxError; // The instruction is incorrect or undefined
-                this.CurrentOperationType = IEEE488.Mock.Ieee488OperationType.None;
+                this.CurrentOperationType = LxiInstrumentOperationType.None;
             }
             _ = this._asyncLocker.Set();//Reset block
         }

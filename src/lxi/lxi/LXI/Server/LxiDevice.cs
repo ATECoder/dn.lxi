@@ -2,11 +2,10 @@ using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;
 using cc.isr.LXI.Logging;
 using System.ComponentModel;
-using cc.isr.LXI.IEEE488;
 using System.Net;
 using cc.isr.VXI11.Server;
 
-namespace cc.isr.LXI.Mock;
+namespace cc.isr.LXI.Server;
 
 /// <summary>   A basic implementation of a <see cref="IVxi11Device"/> interface. </summary>
 public partial class LxiDevice : IVxi11Device
@@ -15,8 +14,8 @@ public partial class LxiDevice : IVxi11Device
     #region " construction and cleanup "
 
     /// <summary>   Constructor. </summary>
-    /// <param name="device">   An implementation of the <see cref="IEEE488.IIeee488Device"/>. </param>
-    public LxiDevice( IEEE488.IIeee488Device device )
+    /// <param name="device">   An implementation of the <see cref="Server.ILxiInstrument"/>. </param>
+    public LxiDevice( ILxiInstrument device )
     {
         this._device = device;
         this._interfaceDeviceString = string.Empty;
@@ -381,32 +380,32 @@ public partial class LxiDevice : IVxi11Device
     /// <summary>
     /// current device
     /// </summary>
-    private readonly IEEE488.IIeee488Device? _device = null;
+    private readonly ILxiInstrument? _device = null;
 
     private void OnDevicePropertyChanged( object sender, PropertyChangedEventArgs e )
     {
-        if ( sender is not IEEE488.IIeee488Device ) return;
-        this.OnDevicePropertyChanged( ( IEEE488.IIeee488Device ) sender, e.PropertyName );
+        if ( sender is not ILxiInstrument ) return;
+        this.OnDevicePropertyChanged( ( ILxiInstrument ) sender, e.PropertyName );
     }
 
-    private void OnDevicePropertyChanged( IIeee488Device sender, string propertyName )
+    private void OnDevicePropertyChanged( ILxiInstrument sender, string propertyName )
     {
-        if ( sender is not IEEE488.IIeee488Device || string.IsNullOrWhiteSpace( propertyName ) ) return;
+        if ( sender is not ILxiInstrument || string.IsNullOrWhiteSpace( propertyName ) ) return;
         {
             switch ( propertyName )
             {
-                case nameof( IEEE488.IIeee488Device.CharacterEncoding ):
+                case nameof( ILxiInstrument.CharacterEncoding ):
                     this.CharacterEncoding = sender.CharacterEncoding;
                     break;
-                case nameof( IEEE488.IIeee488Device.LastDeviceError ):
+                case nameof( ILxiInstrument.LastDeviceError ):
                     this.LastDeviceError = sender.LastDeviceError;
                     break;
 
-                case nameof( IEEE488.IIeee488Device.ReadMessage ):
+                case nameof( ILxiInstrument.ReadMessage ):
                     this.ReadMessage = sender.ReadMessage;
                     break;
 
-                case nameof( IEEE488.IIeee488Device.WriteMessage ):
+                case nameof( ILxiInstrument.WriteMessage ):
                     this.WriteMessage = sender.WriteMessage;
                     break;
 
@@ -414,13 +413,13 @@ public partial class LxiDevice : IVxi11Device
         }
     }
 
-    private void OnDevicePropertiesChanges( IIeee488Device sender )
+    private void OnDevicePropertiesChanges( ILxiInstrument sender )
     {
-        if ( sender is not IEEE488.IIeee488Device ) return;
-        this.OnDevicePropertyChanged( sender, nameof( IEEE488.IIeee488Device.ReadMessage ) );
-        this.OnDevicePropertyChanged( sender, nameof( IEEE488.IIeee488Device.WriteMessage ) );
-        this.OnDevicePropertyChanged( sender, nameof( IEEE488.IIeee488Device.CharacterEncoding ) );
-        this.OnDevicePropertyChanged( sender, nameof( IEEE488.IIeee488Device.LastDeviceError ) );
+        if ( sender is not ILxiInstrument ) return;
+        this.OnDevicePropertyChanged( sender, nameof( ILxiInstrument.ReadMessage ) );
+        this.OnDevicePropertyChanged( sender, nameof( ILxiInstrument.WriteMessage ) );
+        this.OnDevicePropertyChanged( sender, nameof( ILxiInstrument.CharacterEncoding ) );
+        this.OnDevicePropertyChanged( sender, nameof( ILxiInstrument.LastDeviceError ) );
     }
 
     #endregion

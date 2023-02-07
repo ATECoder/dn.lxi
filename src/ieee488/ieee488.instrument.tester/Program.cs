@@ -1,10 +1,11 @@
 // See https://aka.ms/new-console-template for more information
 
 using cc.isr.VXI11;
-using cc.isr.LXI.IEEE488;
 using cc.isr.LXI.Logging;
+using cc.isr.LXI.Server;
+using cc.isr.LXI.Client;
 
-Console.WriteLine( $"VXI-11 {nameof( Ieee488Instrument)} Tester" );
+Console.WriteLine( $"VXI-11 {nameof( LxiInstrumentClient)} Tester" );
 
 string ipv4Address = "192.168.0.144"; // "127.0.0.1";
 
@@ -20,7 +21,7 @@ while ( !ready )
     ready = yesno.KeyChar == 'y' || yesno.KeyChar == 'Y';
 }
 
-using Ieee488Instrument instrument = new();
+using LxiInstrumentClient instrument = new();
 
 instrument.ThreadExceptionOccurred += OnThreadExcetion;
 
@@ -35,7 +36,7 @@ instrument.Connect( ipv4Address, InsterfaceDeviceStringParser.BuildInterfaceDevi
 
 if ( ipv4Address == "127.0.0.1" )
 {
-    string command = Ieee488Commands.IDNRead;
+    string command = LxiInstrumentCommands.IDNRead;
     SendCommand( command );
 
     // closing client throws an exception when using the local mock server.
@@ -43,16 +44,16 @@ if ( ipv4Address == "127.0.0.1" )
 }
 else
 {
-    string command = Ieee488Commands.RST;
+    string command = LxiInstrumentCommands.RST;
     SendCommand( command );
 
-    command = Ieee488Commands.CLS;
+    command = LxiInstrumentCommands.CLS;
     SendCommand( command );
 
     command = "SYST:CLE";
     SendCommand( command );
 
-    command = Ieee488Commands.IDNRead;
+    command = LxiInstrumentCommands.IDNRead;
     SendCommand( command );
 
     Console.WriteLine( $"closing {ipv4Address}" );
@@ -83,7 +84,7 @@ void SendCommand( string command )
 static void OnThreadExcetion( object sender, ThreadExceptionEventArgs e )
 {
     string name = "unknown";
-    if ( sender is Ieee488Instrument ) name = nameof( Ieee488Instrument );
+    if ( sender is LxiInstrumentClient ) name = nameof( LxiInstrumentClient );
 
     Logger.Writer.LogError( $"{name} encountered an exception during an asynchronous operation", e.Exception );
 }

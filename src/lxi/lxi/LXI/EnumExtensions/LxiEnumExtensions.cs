@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using System.Reflection;
 
-using cc.isr.LXI.IEEE488.Mock;
+using cc.isr.LXI.Server;
 
-namespace cc.isr.LXI.IEEE488.EnumExtensions;
+namespace cc.isr.LXI.EnumExtensions;
 
 /// <summary>   A support class for VXI-11 IEEE 488 enum extensions. </summary>
-public static class Ieee488EnumExtensions
+public static class LxiEnumExtensions
 {
 
     /// <summary>   Gets a description from an Enum. </summary>
@@ -24,16 +24,16 @@ public static class Ieee488EnumExtensions
             ?? value.ToString();
     }
 
-    /// <summary>   An int extension method that converts a value to a <see cref="Ieee488OperationType"/>. </summary>
+    /// <summary>   An int extension method that converts a value to a <see cref="LxiInstrumentOperationType"/>. </summary>
     /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
     ///                                         illegal values. </exception>
     /// <param name="value">    An enum constant representing the enum value. </param>
     /// <returns>   Value as the Ieee4888OperationType. </returns>
-    public static Ieee488OperationType ToIeee488OperationType( this int value )
+    public static LxiInstrumentOperationType ToLxiInstrumentOperationType( this int value )
     {
-        return Enum.IsDefined( typeof( Ieee488OperationType ), value )
-            ? ( Ieee488OperationType ) value
-            : throw new ArgumentException( $"{typeof( int )} value of {value} cannot be cast to {nameof( Ieee488OperationType )}" );
+        return Enum.IsDefined( typeof( LxiInstrumentOperationType ), value )
+            ? ( LxiInstrumentOperationType ) value
+            : throw new ArgumentException( $"{typeof( int )} value of {value} cannot be cast to {nameof( LxiInstrumentOperationType )}" );
     }
 
     /// <summary>   An int extension method that converts a value to a <see cref="InterfaceCommand"/>. </summary>
@@ -41,7 +41,7 @@ public static class Ieee488EnumExtensions
     ///                                         illegal values. </exception>
     /// <param name="value">    An enum constant representing the enum value. </param>
     /// <returns>   Value as the Ieee4888InterfaceCommand. </returns>
-    public static InterfaceCommand ToIeee488InterfaceCommand( this int value )
+    public static InterfaceCommand ToInterfaceCommand( this int value )
     {
         return Enum.IsDefined( typeof( InterfaceCommand ), value )
             ? ( InterfaceCommand ) value
@@ -53,7 +53,7 @@ public static class Ieee488EnumExtensions
     ///                                         illegal values. </exception>
     /// <param name="value">    An enum constant representing the enum value. </param>
     /// <returns>   Value as the Ieee4888InterfaceCommandOption. </returns>
-    public static InterfaceCommandOption ToIeee488InterfaceCommandOption( this int value )
+    public static InterfaceCommandOption ToInterfaceCommandOption( this int value )
     {
         return Enum.IsDefined( typeof( InterfaceCommandOption ), value )
             ? ( InterfaceCommandOption ) value

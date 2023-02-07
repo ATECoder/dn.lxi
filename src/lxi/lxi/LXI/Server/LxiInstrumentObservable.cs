@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace cc.isr.LXI.IEEE488.Mock;
+namespace cc.isr.LXI.Server;
 
-public partial class Ieee488Device : INotifyPropertyChanged
+public partial class LxiInstrument : INotifyPropertyChanged
 {
 
     /// <summary>   Occurs when a property value changes. </summary>
