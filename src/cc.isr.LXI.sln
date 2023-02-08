@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.InstrumentClie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.ClientTester", "..\..\vxi\src\apps\vxi11.client.tester\cc.isr.VXI11.ClientTester.csproj", "{8227D869-B6BC-4905-84E4-311378614829}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI.MSTest", "lxi\lxi.MSTest\cc.isr.LXI.MSTest.csproj", "{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{8227D869-B6BC-4905-84E4-311378614829}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8227D869-B6BC-4905-84E4-311378614829}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8227D869-B6BC-4905-84E4-311378614829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 		{8227D869-B6BC-4905-84E4-311378614829} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{68BDC6DB-7CB2-48F4-83BA-4DD381BF503A} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {090D34DC-03CB-40F0-AB31-DE69AAAD7AA2}

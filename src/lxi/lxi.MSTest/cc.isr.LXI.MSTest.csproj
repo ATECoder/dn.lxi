@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>cc.isr.LXI.Visa.MSTest</RootNamespace>
+    <RootNamespace>cc.isr.LXI.MSTest</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
