@@ -3,9 +3,10 @@ using System.Text.RegularExpressions;
 using cc.isr.LXI.Logging;
 namespace cc.isr.LXI.Visa.MSTest
 {
-    /// <summary>   (Unit Test Class) a TCP/IP INSTR address (resource name) tests. </summary>
+    /// <summary>   (Unit Test Class) a visa resource names tests. </summary>
+    /// <remarks>   2023-02-08. </remarks>
     [TestClass]
-    public class TcpipInstrAddressTests
+    public class VisaResourceNamesTests
     {
 
 
