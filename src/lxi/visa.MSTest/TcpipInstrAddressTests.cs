@@ -152,19 +152,19 @@ namespace cc.isr.LXI.Visa.MSTest
             }
         }
 
-        private static void AssertTcpipInstrAddressShouldParse( string address )
+        private static void AssertTcpipInstrAddressShouldParse( string visaResourceName )
         {
-            cc.isr.LXI.Visa.TcpipInstrResourceName instrAddress = new( address );
-            string actual = instrAddress.BuildAddress();
-            cc.isr.LXI.Visa.TcpipInstrResourceName actualAddress = new( actual );
-            Assert.IsTrue( actualAddress.Equals( instrAddress ), $"{address} not equals {actual}" );
-            if ( !instrAddress.InterfaceDeviceAddressParser.IsValid() )
+            cc.isr.LXI.Visa.VisaResourceNameParser instrAddress = new( visaResourceName );
+            string actual = instrAddress.BuildResourceName();
+            cc.isr.LXI.Visa.VisaResourceNameParser actualAddress = new( actual );
+            Assert.IsTrue( actualAddress.Equals( instrAddress ), $"{visaResourceName} not equals {actual}" );
+            if ( !instrAddress.DeviceNameParser.IsValid() )
             {
                 // instrAddress = new( address );
-                _ = instrAddress.InterfaceDeviceAddressParser.IsValid();
+                _ = instrAddress.DeviceNameParser.IsValid();
             }
-            Assert.IsTrue( instrAddress.InterfaceDeviceAddressParser.IsValid(), $"{instrAddress.InterfaceDeviceString} is invalid in {address}" );
-            Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.InterfaceDeviceString ) ? "empty" : instrAddress.InterfaceDeviceString)} for {address} " );
+            Assert.IsTrue( instrAddress.DeviceNameParser.IsValid(), $"{instrAddress.DeviceName} is invalid in {visaResourceName}" );
+            Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.DeviceName ) ? "empty" : instrAddress.DeviceName)} for {visaResourceName} " );
         }
 
         /// <summary>   (Unit Test Method) TCP/IP instr address should parse. </summary>

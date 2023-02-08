@@ -8,43 +8,56 @@ namespace cc.isr.LXI.Visa;
 public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 {
 
+    /// <summary>   (Immutable) the TCP/IP protocol name. </summary>
+    public const string TcpIpProtocolName = "TCPIP";
+
+    /// <summary>   (Immutable) the interface resource class name. </summary>
+    public const string InterfaceResourceClassName = "INTFC";
+
+    /// <summary>   (Immutable) the instrument resource class name. </summary>
+    public const string InstrumentResourceClassName = "INSTR";
+
+
     /// <summary>   Specialized default constructor for use only by derived class. </summary>
     protected VisaResourceNameBase()
     {
+        this.DeviceNameParser = new DeviceNameParser( string.Empty );
         this.Board = string.Empty;
         this.Protocol = string.Empty;
-        this.InterfaceDeviceString = string.Empty;
+        this.DeviceName = string.Empty;
+        this._deviceName = string.Empty;
         this.Host = string.Empty;
-        this.Suffix = string.Empty;
-        this.Address = string.Empty;
+        this.ResourceClass = string.Empty;
+        this.ResourceName = string.Empty;
     }
 
     /// <summary>   Specialized constructor for use only by derived class. </summary>
-    /// <param name="board">    The board. </param>
-    /// <param name="host">     The host. </param>
-    /// <param name="device">   The device. </param>
-    protected VisaResourceNameBase( string board, string host, string device ) : this()
+    /// <remarks>   2023-02-07. </remarks>
+    /// <param name="board">        The board, e.g., TCPIP0. </param>
+    /// <param name="host">         The host, e.g., 192.168.0.144. </param>
+    /// <param name="deviceName">   The device name, e.g., inst0. </param>
+    protected VisaResourceNameBase( string board, string host, string deviceName ) : this()
     {
         this.Board = board;
         this.Host = host;
-        this.InterfaceDeviceString = device;
+        this.DeviceName = deviceName;
     }
 
     /// <summary>   Makes a deep copy of this object. </summary>
     /// <param name="address"> The address of the VISA resource. </param>
     public void Clone( VisaResourceNameBase address )
     {
-        this.Address = address.Address;
+        this.ResourceName = address.ResourceName;
         this.Board = address.Board;
-        this.InterfaceDeviceString = address.InterfaceDeviceString;
+        this.DeviceName = address.DeviceName;
         this.Host = address.Host;
         this.Protocol = address.Protocol;
-        this.Suffix = address.Suffix;
+        this.ResourceClass = address.ResourceClass;
     }
 
-    /// <summary>   Builds the VISA address of the instrument. </summary>
+    /// <summary>   Builds the VISA resource name of the instrument. </summary>
     /// <returns>   A string. </returns>
-    public virtual string BuildAddress()
+    public virtual string BuildResourceName()
     {
         StringBuilder builder = new();
         if ( !string.IsNullOrEmpty( this.Board ) )
@@ -58,20 +71,20 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
             _ = builder.Append( this.Host );
         }
 
-        if ( !string.IsNullOrEmpty( this.InterfaceDeviceString ) )
+        if ( !string.IsNullOrEmpty( this.DeviceName ) )
         {
             if ( builder.Length > 0 )
                 _ = builder.Append( "::" );
 
-            _ = builder.Append( this.InterfaceDeviceString );
+            _ = builder.Append( this.DeviceName );
         }
 
-        if ( !string.IsNullOrEmpty( this.Suffix ) )
+        if ( !string.IsNullOrEmpty( this.ResourceClass ) )
         {
             if ( builder.Length > 0 )
                 _ = builder.Append( "::" );
 
-            _ = builder.Append( this.Suffix );
+            _ = builder.Append( this.ResourceClass );
         }
 
         return builder.ToString();
@@ -88,22 +101,22 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     public bool Equals( VisaResourceNameBase other )
     {
         return other != null && string.Equals( this.Board, other.Board, StringComparison.OrdinalIgnoreCase ) &&
-               (string.Equals( this.InterfaceDeviceString, other.InterfaceDeviceString, StringComparison.OrdinalIgnoreCase ) ||
-                 this.InterfaceDeviceString is null && other.InterfaceDeviceString is null ||
-                 this.InterfaceDeviceString is null && string.Equals( other.InterfaceDeviceString, $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) ||
-                 string.Equals( this.InterfaceDeviceString, $"{InsterfaceDeviceStringParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) && other.InterfaceDeviceString is null) &&
+               (string.Equals( this.DeviceName, other.DeviceName, StringComparison.OrdinalIgnoreCase ) ||
+                 this.DeviceName is null && other.DeviceName is null ||
+                 this.DeviceName is null && string.Equals( other.DeviceName, $"{DeviceNameParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) ||
+                 string.Equals( this.DeviceName, $"{DeviceNameParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) && other.DeviceName is null) &&
                string.Equals( this.Host, other.Host, StringComparison.OrdinalIgnoreCase ) &&
                string.Equals( this.Protocol, other.Protocol, StringComparison.OrdinalIgnoreCase ) &&
-               string.Equals( this.Suffix, other.Suffix, StringComparison.OrdinalIgnoreCase );
+               string.Equals( this.ResourceClass, other.ResourceClass, StringComparison.OrdinalIgnoreCase );
         throw new NotImplementedException();
     }
 
-    /// <summary>   Gets or sets the address of the VISA resource, which is also called resource name. </summary>
-    /// <remarks> The VISA address format is as follows: <para>
-    /// ‘Communication/Board Type( USB, GPIB, etc.)::Resource Information( Vendor ID, Product ID, Serial Number, IP address, etc..)::Resource Type’ </para>
+    /// <summary>   Gets or sets the name of the VISA resource, which is also called resource name. </summary>
+    /// <remarks> The VISA resource name format is as follows: <para>
+    /// ‘Communication/Board Type( USB, GPIB, etc.)::Resource Information( Vendor ID, Product ID, Serial Number, IP address, etc..)::Resource Class’ </para>
     /// </remarks>
     /// <value> The address. </value>
-    public string Address { get; protected set; }
+    public string ResourceName { get; protected set; }
 
     /// <summary>   Gets or sets the board, e.g., TCPIP0. </summary>
     /// <value> The board. </value>
@@ -117,12 +130,27 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     /// <value> The host. </value>
     public string Host { get; set; }
 
-    /// <summary>   Gets or sets the device address also termed interface device string, e.g., inst0 or gpib0,5 </summary>
-    /// <value> The interface device string. </value>
-    public string InterfaceDeviceString { get; set; }
+    private string _deviceName;
+    /// <summary>   Gets or sets the device name also termed device name, e.g., inst0 or gpib0,5 </summary>
+    /// <value> The device name. </value>
+    public string DeviceName
+    {
+        get => this._deviceName;
+        set {
+            if ( !string.Equals( this.DeviceName, value, StringComparison.OrdinalIgnoreCase ) )
+            {
+                this._deviceName = value;
+                _ = this.DeviceNameParser.Parse( this.DeviceName );
+            }
+        }
+    }
 
-    /// <summary>   Gets or sets the suffix, e.g., INSTR. </summary>
+    /// <summary>   Gets or sets the resource class, e.g., INSTR, INTFC, or SOCKET. </summary>
     /// <value> The suffix. </value>
-    public string Suffix { get; set; }
+    public string ResourceClass { get; set; }
+
+    /// <summary>   Gets or sets the device name parser. </summary>
+    /// <value> The device name parser. </value>
+    public DeviceNameParser DeviceNameParser { get; }
 
 }

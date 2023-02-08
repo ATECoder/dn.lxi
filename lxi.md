@@ -8,7 +8,7 @@ The IVI driver provided with an LXI Device shall accept any valid VISA resource 
 
 Specifically, valid VISA resource names for LXI Devices are:  
 * TCPIP[board]::host address[::LAN device name][::INSTR]
-* TCPIP[board]::host address::port::SOCKET10
+* TCPIP[board]::host address::port::SOCKET
 * TCPIP[board]::host address[::HiSLIP device name[,HiSLIP
 port]][::INSTR]
 * TCPIP[board]::credential information@host address::HiSLIP device
@@ -18,7 +18,7 @@ Where:
 * _board_ is an integer representing a physical network interface card in the computer;
 * _host address_ is either a host name or IP address (4 bytes in decimal separated by “.”);
 * _“INSTR”_ is the resource class. It implies a protocol that supports read, write, trigger, status, and clear;
-* _“SOCKET”_ is the resource class. It implies a protocol based on a raw tcp/ip connection
+* _“SOCKET”_ is the resource class. It implies a protocol based on a raw TCP/IP connection
 that may only support read/write;
 * _HiSLIP device name indicates the sub-address of the HiSLIP server within the device. It
 begins with _‘hislip’_. _’hislip0’_ is typically used when there is only a single sub-address.
@@ -40,7 +40,6 @@ Note that this resource descriptor may be passed directly by the customer to the
 
 ## SCPI Is Not Required
 The LXI spec does not require an underlying SCPI interface to the device. LXI presumes the primary control interface is IVI. The actual communication between the driver and the device is at the discretion of the device designer to optimize the performance and price of the device.
-
 
 ### References
 

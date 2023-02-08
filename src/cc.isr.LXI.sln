@@ -68,9 +68,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI", "lxi\lxi\cc.is
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.LXI.Visa.MSTest", "lxi\visa.MSTest\cc.isr.LXI.Visa.MSTest.csproj", "{2C570F06-41CE-44D7-973D-BCD8C408D321}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.ClientTester", "..\..\vxi\src\apps\vxi11client.tester\cc.isr.VXI11.ClientTester.csproj", "{4A1885F3-4356-40E9-BEB1-58052355FC88}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.Discover", "..\..\vxi\src\apps\lxi.discover\cc.isr.VXI11.Discover.csproj", "{AF353834-D978-43B2-925D-B8AB682451B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.SingleClientServerTester", "..\..\vxi\src\apps\vxi11.single.client.server.tester\cc.isr.VXI11.SingleClientServerTester.csproj", "{88CDC6EE-6221-43AE-97E0-E4C64A5993D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.InstrumentClientTester", "..\..\vxi\src\apps\vxi11.instrument.client.tester\cc.isr.VXI11.InstrumentClientTester.csproj", "{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.VXI11.ClientTester", "..\..\vxi\src\apps\vxi11.client.tester\cc.isr.VXI11.ClientTester.csproj", "{8227D869-B6BC-4905-84E4-311378614829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,14 +114,22 @@ Global
 		{2C570F06-41CE-44D7-973D-BCD8C408D321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C570F06-41CE-44D7-973D-BCD8C408D321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C570F06-41CE-44D7-973D-BCD8C408D321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A1885F3-4356-40E9-BEB1-58052355FC88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF353834-D978-43B2-925D-B8AB682451B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF353834-D978-43B2-925D-B8AB682451B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF353834-D978-43B2-925D-B8AB682451B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF353834-D978-43B2-925D-B8AB682451B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8227D869-B6BC-4905-84E4-311378614829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8227D869-B6BC-4905-84E4-311378614829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8227D869-B6BC-4905-84E4-311378614829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8227D869-B6BC-4905-84E4-311378614829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,8 +147,10 @@ Global
 		{D6C272AF-0E11-47CB-98C5-143C7364FCC8} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 		{6E6ABDFE-0A81-4B0E-900E-21BCFCDAD263} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
 		{2C570F06-41CE-44D7-973D-BCD8C408D321} = {86C043E0-7881-4983-9ABB-F4E26483EE68}
-		{4A1885F3-4356-40E9-BEB1-58052355FC88} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 		{AF353834-D978-43B2-925D-B8AB682451B3} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{88CDC6EE-6221-43AE-97E0-E4C64A5993D5} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{2D968753-21A2-4CFA-9EF6-DC6E330BD6F8} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
+		{8227D869-B6BC-4905-84E4-311378614829} = {469FBA75-18C0-4AF7-A21D-182BBAF038C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {090D34DC-03CB-40F0-AB31-DE69AAAD7AA2}
