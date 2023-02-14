@@ -75,7 +75,7 @@ public class VisaResourceNameParser : VisaResourceNameBase
 
     /// <summary>   Parse the VISA resource name. </summary>
     /// <param name="resourceName"> Address of the VISA resource. </param>
-    /// <returns>   True if it succeeds, false if it fails. </returns>
+    /// <returns>   <see langword="true"/> if it succeeds; otherwise, <see langword="false"/>. </returns>
     public bool ParseResourceName( string resourceName )
     {
         if ( resourceName == null ) { return false; }
