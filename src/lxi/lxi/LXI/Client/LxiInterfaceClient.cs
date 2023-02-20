@@ -13,7 +13,7 @@ public class LxiInterfaceClient : VXI11.Client.Vxi11InterfaceClient
     /// <param name="connectTimeout">   (Optional) The connect timeout. </param>
     public void Connect( string resourceName, int connectTimeout = 3000 )
     {
-        VisaResourceNameParser parser  = new ( resourceName, VisaResourceNameBase.TcpIpProtocolName,
+        VisaResourceNameParser parser = new( resourceName, VisaResourceNameBase.TcpIpProtocolName,
                                                                  VisaResourceNameBase.InterfaceResourceClassName );
         this.Connect( parser.Host, parser.DeviceName, connectTimeout );
     }
