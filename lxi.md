@@ -13,6 +13,7 @@ Specifically, valid VISA resource names for LXI Devices are:
 port]][::INSTR]
 * TCPIP[board]::credential information@host address::HiSLIP device
 name[,HiSLIP port]][::INSTR]
+* TCPIP[board]::host address::USB[board]::manufacturer ID::model code::serial number[::USB interface number]::INSTR
 
 Where:
 * _board_ is an integer representing a physical network interface card in the computer;
@@ -50,3 +51,4 @@ The LXI spec does not require an underlying SCPI interface to the device. LXI pr
 [RPC]: https://en.wikipedia.org/wiki/Sun_RPC
 [Making sense of T&M protocols]: https://tomverbeure.github.io/2020/06/07/Making-Sense-of-Test-and-Measurement-Protocols.html
 [ONC Remote Procedure Call (RPC)]: https://en.wikipedia.org/wiki/Open_Network_Computing_Remote_Procedure_Call
+[Visa Resource Name]: https://www.ni.com/docs/en-US/bundle/labview/page/lvinstio/visa_resource_name_generic.html

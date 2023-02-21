@@ -5,7 +5,7 @@ using cc.isr.VXI11;
 namespace cc.isr.LXI.Visa;
 
 /// <summary>   A parser for a VISA resource name. </summary>
-public class VisaResourceNameParser : VisaResourceNameBase
+public class VisaResourceNameParser : VisaResourceNameBase, IEquatable<VisaResourceNameParser>
 {
 
     /// <summary>   Constructor. </summary>
@@ -91,5 +91,19 @@ public class VisaResourceNameParser : VisaResourceNameBase
         return true;
     }
 
+
+    /// <summary>
+    /// Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">    An object to compare with this object. </param>
+    /// <returns>
+    /// true if the current object is equal to the <paramref name="other">other</paramref> parameter;
+    /// otherwise, false.
+    /// </returns>
+    public bool Equals( VisaResourceNameParser other )
+    {
+
+        return (( VisaResourceNameBase ) this).Equals( ( VisaResourceNameParser ) other );
+    }
 
 }

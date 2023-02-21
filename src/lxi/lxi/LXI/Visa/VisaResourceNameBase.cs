@@ -90,6 +90,15 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
         return builder.ToString();
     }
 
+    /// <summary>   Equals device name. </summary>
+    /// <remarks>   2023-02-20. </remarks>
+    /// <param name="deviceName">   The device name, e.g., inst0. </param>
+    /// <returns>   True if equals device name, false if not. </returns>
+    public bool EqualsDeviceName( string deviceName )
+    {
+        return new DeviceNameParser(this.DeviceName ).Equals( new DeviceNameParser( deviceName) );
+    }
+
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -100,15 +109,11 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     /// </returns>
     public bool Equals( VisaResourceNameBase other )
     {
-        return other != null && string.Equals( this.Board, other.Board, StringComparison.OrdinalIgnoreCase ) &&
-               (string.Equals( this.DeviceName, other.DeviceName, StringComparison.OrdinalIgnoreCase ) ||
-                 this.DeviceName is null && other.DeviceName is null ||
-                 this.DeviceName is null && string.Equals( other.DeviceName, $"{DeviceNameParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) ||
-                 string.Equals( this.DeviceName, $"{DeviceNameParser.GenericInterfaceFamily}0", StringComparison.OrdinalIgnoreCase ) && other.DeviceName is null) &&
-               string.Equals( this.Host, other.Host, StringComparison.OrdinalIgnoreCase ) &&
-               string.Equals( this.Protocol, other.Protocol, StringComparison.OrdinalIgnoreCase ) &&
-               string.Equals( this.ResourceClass, other.ResourceClass, StringComparison.OrdinalIgnoreCase );
-        throw new NotImplementedException();
+        return other != null && string.Equals( this.Board, other.Board, StringComparison.OrdinalIgnoreCase )
+            && this.EqualsDeviceName( other.DeviceName )
+            && string.Equals( this.Host, other.Host, StringComparison.OrdinalIgnoreCase )
+            && string.Equals( this.Protocol, other.Protocol, StringComparison.OrdinalIgnoreCase )
+            && string.Equals( this.ResourceClass, other.ResourceClass, StringComparison.OrdinalIgnoreCase );
     }
 
     /// <summary>   Gets or sets the name of the VISA resource, which is also called resource name. </summary>
