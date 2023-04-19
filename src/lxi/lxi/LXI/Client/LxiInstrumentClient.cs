@@ -10,7 +10,7 @@ namespace cc.isr.LXI.Client;
 public class LxiInstrumentClient : VXI11.Client.Vxi11InstrumentClient
 {
 
-    #region " construction and cleanup "
+    #region " Construction and Cleanup "
 
     /// <summary>   Connects. </summary>
     /// <param name="resourceName">     Name of the resource. </param>
