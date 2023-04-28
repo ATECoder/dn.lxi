@@ -1,7 +1,7 @@
-# LXI - A standard for LAN equipped instrumentation 
+### LXI - A standard for LAN equipped instrumentation 
 
 
-## Syntax of the Device Address
+#### Syntax of the Device Address
 LXI IVI Drivers shall accept VISA resource names.  
 
 The IVI driver provided with an LXI Device shall accept any valid VISA resource name as the network resource location as described in this section.  
@@ -39,10 +39,10 @@ The driver shall choose the most appropriate protocol for controlling that devic
 
 Note that this resource descriptor may be passed directly by the customer to the open call or it may be extracted from the IVI Configuration Store.
 
-## SCPI Is Not Required
+#### SCPI Is Not Required
 The LXI spec does not require an underlying SCPI interface to the device. LXI presumes the primary control interface is IVI. The actual communication between the driver and the device is at the discretion of the device designer to optimize the performance and price of the device.
 
-### References
+##### References
 
 [ICS Electronics]: https://www.icselect.com/
 [LXI]: https://www.lxistandard.org/About/AboutLXI.aspx
