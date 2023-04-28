@@ -19,7 +19,7 @@ A control and communication library for LXI-based instruments.
 
 #### Description
 
-[ISR's LXI] is a partial C### implementation of the [LXI] Specification for instrument control and communication.
+[ISR's LXI] is a partial C# implementation of the [LXI] Specification for instrument control and communication.
 
 #### History
 
@@ -27,11 +27,11 @@ A control and communication library for LXI-based instruments.
 
 [ISR's VXI-11] is a is a fork of [VXI11.CSharp].
 
-[ISR's VXI-11] uses [ISR's ONC RPC], which is a C### implementation of the [Sun RPC] ported from the [Java ONC RPC] implementation termed Remote Tea.
+[ISR's VXI-11] uses [ISR's ONC RPC], which is a C# implementation of the [Sun RPC] ported from the [Java ONC RPC] implementation termed Remote Tea.
 
 [ISR's ONC RPC] is a fork of [GB1.RemoteTea.Net], which was forked from [Wes Day's RemoteTea.Net], which is a fork of [Jay Walter's SourceForge repository], which is a port of [Java ONC RPC] as documented in [org.acplt.oncrpc package].
 
-[ISR's ONC RPC] uses [ISR's XDR], which is a C### implementation of the [XDR: External Data Representation Standard (May 2006)] as implemented in [Java ONC RPC] implementation called Remote Tea. [ISR's XDR] was split off from [GB1.RemoteTea.Net].
+[ISR's ONC RPC] uses [ISR's XDR], which is a C# implementation of the [XDR: External Data Representation Standard (May 2006)] as implemented in [Java ONC RPC] implementation called Remote Tea. [ISR's XDR] was split off from [GB1.RemoteTea.Net].
 
 
 ##### On the agenda
