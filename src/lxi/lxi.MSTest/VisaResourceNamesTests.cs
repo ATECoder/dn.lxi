@@ -12,7 +12,7 @@ namespace cc.isr.LXI.MSTest
 
         private readonly string[] _addresses = { "TCPIP::10.0.0.1::INSTR",
                                                  "TCPIP0::10.0.0.1::INSTR",
-                                                 "TCPIP0::10.0.0.1::inst0::INSTR",
+                                                 "TCPIP0::10.0.0.1::INST0::INSTR",
                                                  "TCPIP::10.0.0.1::gpib,5::INSTR",
                                                  "TCPIP0::10.0.0.1::gpib,5::INSTR",
                                                  "TCPIP0::10.0.0.1::gpib,5,10::INSTR",
@@ -58,8 +58,8 @@ namespace cc.isr.LXI.MSTest
         /// 2023-02-02 09:45:58.583,device
         /// 2023-02-02 09:45:58.583,suffix INSTR
         /// 2023-02-02 09:45:58.583,
-        /// Parse of: TCPIP0::10.0.0.1::inst0::INSTR
-        /// 2023-02-02 09:45:58.583,0 TCPIP0::10.0.0.1::inst0::INSTR
+        /// Parse of: TCPIP0::10.0.0.1::INST0::INSTR
+        /// 2023-02-02 09:45:58.583,0 TCPIP0::10.0.0.1::INST0::INSTR
         /// 2023-02-02 09:45:58.583,1 ::10.0.0.1
         /// 2023-02-02 09:45:58.583,2 ::inst0
         /// 2023-02-02 09:45:58.583,3
@@ -174,7 +174,7 @@ namespace cc.isr.LXI.MSTest
         /// Standard Output: 
         /// 2023-02-02 09:45:58.570,device is inst0 for TCPIP::10.0.0.1::INSTR
         /// 2023-02-02 09:45:58.573,device is inst0 for TCPIP0::10.0.0.1::INSTR
-        /// 2023-02-02 09:45:58.573,device is inst0 for TCPIP0::10.0.0.1::inst0::INSTR
+        /// 2023-02-02 09:45:58.573,device is inst0 for TCPIP0::10.0.0.1::INST0::INSTR
         /// 2023-02-02 09:45:58.574,device is gpib,5 for TCPIP::10.0.0.1::gpib,5::INSTR
         /// 2023-02-02 09:45:58.574,device is gpib,5 for TCPIP0::10.0.0.1::gpib,5::INSTR
         /// 2023-02-02 09:45:58.574,device is gpib,5,10 for TCPIP0::10.0.0.1::gpib,5,10::INSTR
