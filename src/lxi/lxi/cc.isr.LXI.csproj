@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
     <LangVersion>latest</LangVersion>
 
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,34 +11,57 @@
     <!-- Assembly Info -->
     <RootNamespace>cc.isr</RootNamespace>
     <AssemblyName>cc.isr.LXI</AssemblyName>
+    <ApplicationTitle>cc.isr.LXI</ApplicationTitle>
+    <ApplicationId>cc.isr.lxi</ApplicationId>
 
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <OutputType>Library</OutputType>
-    <NoWarn>1591</NoWarn>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 
-    <!-- Display name -->
-    <ApplicationTitle>cc.isr.LXI</ApplicationTitle>
+    <!-- Coding -->
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>Off</OptionInfer>
 
-    <!-- App Identifier -->
-    <ApplicationId>cc.isr.lxi</ApplicationId>
+    <!-- Signature -->
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\items\keyPair.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageId>cc.isr.LXI</PackageId>
     <Description>A pure C# implementation of LXI instrument communication.</Description>
     <PackageTags>VXI-11</PackageTags>
+    <PackageOutputPath>C:\my\nuget</PackageOutputPath>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- Documentation -->
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\items\readme.md" Pack="true" PackagePath="" />
-  </ItemGroup>
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);MYPROJREF;</DefineConstants>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="$(DefineConstants.Contains(';PROJREF;')) OR $(DefineConstants.Contains(';MYPROJREF;'))">
+	  <ItemGroup>
+		<ProjectReference Include="..\..\..\..\vxi\src\vxi\client\cc.isr.VXI11.Client.csproj" />
+	  </ItemGroup>
+    </When>
+    <Otherwise>
+	    <ItemGroup>
+        <PackageReference Include="cc.isr.VXI11.Client" Version="1.0.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\vxi\src\vxi\client\cc.isr.VXI11.Client.csproj" />
+    <None Include="..\..\items\readme.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
