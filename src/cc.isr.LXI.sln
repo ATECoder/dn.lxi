@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xdr", "xdr", "{ECE00E6D-3C3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lxi", "lxi", "{86C043E0-7881-4983-9ABB-F4E26483EE68}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{4E793F65-6C68-43ED-8E2F-5C8BDD51A014}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{4E793F65-6C68-43ED-8E2F-5C8BDD51A014}"
 	ProjectSection(SolutionItems) = preProject
 		cc.isr.Lxi.sln.vsspell = cc.isr.Lxi.sln.vsspell
 		..\CHANGELOG.md = ..\CHANGELOG.md
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.XDR", "..\..\xdr\src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.XDR.MSTest", "..\..\xdr\src\xdr\xdr.MSTest\cc.isr.XDR.MSTest.csproj", "{4FA23A6A-184E-48EA-81B0-A4EFCF3588BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{C9EC5D87-1B5B-42EB-BCB9-767B69A4DF9F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{C9EC5D87-1B5B-42EB-BCB9-767B69A4DF9F}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\xdr\CHANGELOG.md = ..\..\xdr\CHANGELOG.md
 		..\..\xdr\src\items\readme.md = ..\..\xdr\src\items\readme.md
@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{C9EC5D
 		..\..\xdr\xdr.md = ..\..\xdr\xdr.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{2201DCC6-F504-427C-8BC9-420202A5506C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{2201DCC6-F504-427C-8BC9-420202A5506C}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\oncrpc\CHANGELOG.md = ..\..\oncrpc\CHANGELOG.md
 		..\..\oncrpc\onc.rpc.md = ..\..\oncrpc\onc.rpc.md
@@ -50,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.ONC.RPC.MSTest", "..
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vxi", "vxi", "{469FBA75-18C0-4AF7-A21D-182BBAF038C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~items", "~items", "{9F383207-81EE-4C90-890C-76810B28F113}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{9F383207-81EE-4C90-890C-76810B28F113}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\vxi\CHANGELOG.md = ..\..\vxi\CHANGELOG.md
 		..\..\vxi\src\items\readme.md = ..\..\vxi\src\items\readme.md

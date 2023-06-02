@@ -25,8 +25,8 @@ namespace cc.isr.LXI.MSTest
             var m = Regex.Match( address, pattern, RegexOptions.IgnoreCase );
             Assert.IsNotNull( m );
             Assert.IsTrue( m.Groups.Keys.Any() );
-            Logger.Writer.LogInformation( $"\nParse of: {address}" );
-            foreach ( var key in m.Groups.Keys ) { Logger.Writer.LogInformation( $"{key} {m.Groups[key]}" ); }
+            Logger?.LogInformation( $"\nParse of: {address}" );
+            foreach ( var key in m.Groups.Keys ) { Logger?.LogInformation( $"{key} {m.Groups[key]}" ); }
         }
 
         /// <summary>   (Unit Test Method) TCP/IP visa address should parse. </summary>
@@ -165,7 +165,7 @@ namespace cc.isr.LXI.MSTest
                 _ = instrAddress.DeviceNameParser.IsValid();
             }
             Assert.IsTrue( instrAddress.DeviceNameParser.IsValid(), $"{instrAddress.DeviceName} is invalid in {visaResourceName}" );
-            Logger.Writer.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.DeviceName ) ? "empty" : instrAddress.DeviceName)} for {visaResourceName} " );
+            Logger?.LogInformation( $"device is {(string.IsNullOrEmpty( instrAddress.DeviceName ) ? "empty" : instrAddress.DeviceName)} for {visaResourceName} " );
         }
 
         /// <summary>   (Unit Test Method) TCP/IP instr address should parse. </summary>
