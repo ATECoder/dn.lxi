@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace cc.isr.MSTest;
 
 /// <summary>   A logger trace listener. </summary>

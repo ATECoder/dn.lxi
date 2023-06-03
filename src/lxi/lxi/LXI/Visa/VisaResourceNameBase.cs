@@ -35,7 +35,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     /// <remarks>   2023-02-07. </remarks>
     /// <param name="board">        The board, e.g., TCPIP0. </param>
     /// <param name="host">         The host, e.g., 192.168.0.144. </param>
-    /// <param name="deviceName">   The device name, e.g., inst0. </param>
+    /// <param name="deviceName">   The device name, e.g., INST0. </param>
     protected VisaResourceNameBase( string board, string host, string deviceName ) : this()
     {
         this.Board = board;
@@ -92,7 +92,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 
     /// <summary>   Equals device name. </summary>
     /// <remarks>   2023-02-20. </remarks>
-    /// <param name="deviceName">   The device name, e.g., inst0. </param>
+    /// <param name="deviceName">   The device name, e.g., INST0. </param>
     /// <returns>   True if equals device name, false if not. </returns>
     public bool EqualsDeviceName( string deviceName )
     {
@@ -136,7 +136,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     public string Host { get; set; }
 
     private string _deviceName;
-    /// <summary>   Gets or sets the device name also termed device name, e.g., inst0 or gpib0,5 </summary>
+    /// <summary>   Gets or sets the device name also termed device name, e.g., INST0 or gpib0,5 </summary>
     /// <value> The device name. </value>
     public string DeviceName
     {
