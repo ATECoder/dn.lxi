@@ -49,12 +49,12 @@
 
   <Choose>
     <When Condition="$(DefineConstants.Contains(';PROJREF;')) OR $(DefineConstants.Contains(';MYPROJREF;'))">
-	  <ItemGroup>
-		<ProjectReference Include="..\..\..\..\vxi\src\vxi\client\cc.isr.VXI11.Client.csproj" />
-	  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\vxi\src\vxi\client\cc.isr.VXI11.Client.csproj" />
+    </ItemGroup>
     </When>
     <Otherwise>
-	    <ItemGroup>
+        <ItemGroup>
         <PackageReference Include="cc.isr.VXI11.Client" Version="1.0.0" />
       </ItemGroup>
     </Otherwise>
