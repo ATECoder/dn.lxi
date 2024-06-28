@@ -56,7 +56,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     }
 
     /// <summary>   Builds the VISA resource name of the instrument. </summary>
-    /// <returns>   A string. </returns>
+    /// <returns>   A <see cref="string" />. </returns>
     public virtual string BuildResourceName()
     {
         StringBuilder builder = new();
