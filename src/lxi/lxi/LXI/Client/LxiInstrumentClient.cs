@@ -9,9 +9,6 @@ namespace cc.isr.LXI.Client;
 /// <summary>   An LXI instrument client. </summary>
 public class LxiInstrumentClient : VXI11.Client.Vxi11InstrumentClient
 {
-
-    #region " construction and cleanup "
-
     /// <summary>   Connects. </summary>
     /// <param name="resourceName">     Name of the resource. </param>
     /// <param name="connectTimeout">   (Optional) The connect timeout. </param>

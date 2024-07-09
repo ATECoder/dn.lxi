@@ -6,7 +6,6 @@ namespace cc.isr.LXI.MSTest;
 [TestClass]
 public class VisaResourceNamesTests
 {
-
     #region " construction and cleanup "
 
     /// <summary>   Initializes the test class before running the first test. </summary>
