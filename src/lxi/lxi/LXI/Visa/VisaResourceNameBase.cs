@@ -141,13 +141,14 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     public string DeviceName
     {
         get => this._deviceName;
-        set {
-            if ( !string.Equals( this.DeviceName, value, StringComparison.OrdinalIgnoreCase ) )
+        
+            {
+             if ( !string.Equals( this.DeviceName, value, StringComparison.OrdinalIgnoreCase ) )
             {
                 this._deviceName = value;
                 _ = this.DeviceNameParser.Parse( this.DeviceName );
             }
-        }
+      }
     }
 
     /// <summary>   Gets or sets the resource class, e.g., INSTR, INTFC, or SOCKET. </summary>
