@@ -25,5 +25,4 @@ public class LxiInterfaceClient : VXI11.Client.Vxi11InterfaceClient
     }
 
     #endregion
-
 }

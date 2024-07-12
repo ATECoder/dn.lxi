@@ -1,5 +1,4 @@
 using System.Net;
-
 using cc.isr.LXI.Visa;
 using cc.isr.VXI11;
 using cc.isr.VXI11.Codecs;

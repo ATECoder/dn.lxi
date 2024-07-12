@@ -275,7 +275,5 @@ public class VisaResourceNamesTests
         }
     }
 
-
     #endregion
-
 }

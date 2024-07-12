@@ -3,7 +3,6 @@ using cc.isr.VXI11;
 
 namespace cc.isr.LXI.Visa;
 
-
 /// <summary>   A VISA resource address base class. </summary>
 public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 {

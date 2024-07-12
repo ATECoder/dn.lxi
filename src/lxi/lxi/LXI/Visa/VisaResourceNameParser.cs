@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-
 using cc.isr.VXI11;
 
 namespace cc.isr.LXI.Visa;
