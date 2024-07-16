@@ -1,7 +1,6 @@
 namespace cc.isr.LXI;
 internal interface ICloseable : IDisposable
 {
-
     /// <summary>
     /// Closes the connection to an ONC/RPC server and frees all network-related resources.
     /// </summary>

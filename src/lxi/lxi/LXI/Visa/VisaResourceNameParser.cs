@@ -6,7 +6,6 @@ namespace cc.isr.LXI.Visa;
 /// <summary>   A parser for a VISA resource name. </summary>
 public class VisaResourceNameParser : VisaResourceNameBase, IEquatable<VisaResourceNameParser>
 {
-
     /// <summary>   Constructor. </summary>
     /// <remarks>   2023-02-07. </remarks>
     /// <param name="defaultProtocol">      The default protocol. </param>

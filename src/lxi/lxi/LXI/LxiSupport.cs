@@ -8,7 +8,6 @@ namespace cc.isr.LXI;
 /// <summary>   An LXI support. </summary>
 public static class LxiSupport
 {
-
     /// <summary>   Gets a description from an Enum. </summary>
     /// <param name="value">    An enum constant representing the value option. </param>
     /// <returns>   The description. </returns>

@@ -6,7 +6,6 @@ namespace cc.isr.LXI.Visa;
 /// <summary>   A VISA resource address base class. </summary>
 public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 {
-
     /// <summary>   (Immutable) the TCP/IP protocol name. </summary>
     public const string TcpIpProtocolName = "TCPIP";
 
@@ -15,7 +14,6 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
 
     /// <summary>   (Immutable) the instrument resource class name. </summary>
     public const string InstrumentResourceClassName = "INSTR";
-
 
     /// <summary>   Specialized default constructor for use only by derived class. </summary>
     protected VisaResourceNameBase()
