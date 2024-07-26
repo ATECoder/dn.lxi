@@ -9,12 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lxi", "lxi", "{86C043E0-788
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{4E793F65-6C68-43ED-8E2F-5C8BDD51A014}"
 	ProjectSection(SolutionItems) = preProject
-		cc.isr.Lxi.sln.vsspell = cc.isr.Lxi.sln.vsspell
 		..\CHANGELOG.md = ..\CHANGELOG.md
 		..\lxi.md = ..\lxi.md
 		items\readme.md = items\readme.md
 		..\README.md = ..\README.md
 		items\version.build.bat = items\version.build.bat
+
 		items\version.build.props = items\version.build.props
 	EndProjectSection
 EndProject
