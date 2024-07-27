@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
-namespace cc.isr.LXI.MSTest;
+using cc.isr.MSTest.Exceptions;
+
+	namespace cc.isr.LXI.MSTest;
 
 /// <summary>   (Unit Test Class) a visa resource names tests. </summary>
 /// <remarks>   2023-02-08. </remarks>
@@ -24,7 +26,7 @@ public class VisaResourceNamesTests
             if ( Logger is null )
                 Console.WriteLine( methodFullName );
             else
-                Logger?.LogMemberInfo( methodFullName );
+                Logger?.LogInformationMultiLineMessage( methodFullName );
         }
         catch ( Exception ex )
         {
@@ -87,7 +89,7 @@ public class VisaResourceNamesTests
 
     /// <summary>   Gets a logger instance for this category. </summary>
     /// <value> The logger. </value>
-    public static ILogger<VisaResourceNamesTests>? Logger { get; } = LoggerProvider.InitLogger<VisaResourceNamesTests>();
+    public static ILogger<VisaResourceNamesTests>? Logger { get; } = LoggerProvider.CreateLogger<VisaResourceNamesTests>();
 
     #endregion
 
@@ -108,8 +110,8 @@ public class VisaResourceNamesTests
         var m = Regex.Match( address, pattern, RegexOptions.IgnoreCase );
         Assert.IsNotNull( m );
         Assert.IsTrue( m.Groups.Keys.Any() );
-        Logger?.LogInformation( $"\nParse of: {address}" );
-        foreach ( var key in m.Groups.Keys ) { Logger?.LogInformation( $"{key} {m.Groups[key]}" ); }
+        Logger?.LogInformationMessage( $"\nParse of: {address}" );
+        foreach ( var key in m.Groups.Keys ) { Logger?.LogInformationMessage( $"{key} {m.Groups[key]}" ); }
     }
 
     /// <summary>   (Unit Test Method) TCP/IP visa address should parse. </summary>
@@ -248,7 +250,7 @@ public class VisaResourceNamesTests
             _ = instrumentAddress.DeviceNameParser.IsValid();
         }
         Assert.IsTrue( instrumentAddress.DeviceNameParser.IsValid(), $"{instrumentAddress.DeviceName} is invalid in {visaResourceName}" );
-        Logger?.LogInformation( $"device is {(string.IsNullOrEmpty( instrumentAddress.DeviceName ) ? "empty" : instrumentAddress.DeviceName)} for {visaResourceName} " );
+        Logger?.LogInformationMessage( $"device is {(string.IsNullOrEmpty( instrumentAddress.DeviceName ) ? "empty" : instrumentAddress.DeviceName)} for {visaResourceName} " );
     }
 
     /// <summary>   (Unit Test Method) TCP/IP instrument address should parse. </summary>
