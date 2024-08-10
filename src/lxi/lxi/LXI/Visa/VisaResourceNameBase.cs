@@ -133,6 +133,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     public string Host { get; set; }
 
     private string _deviceName;
+
     /// <summary>   Gets or sets the device name also termed device name, e.g., INST0 or gpib0,5 </summary>
     /// <value> The device name. </value>
     public string DeviceName
