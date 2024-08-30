@@ -99,7 +99,6 @@ public class VisaResourceNameParser : VisaResourceNameBase, IEquatable<VisaResou
     /// </returns>
     public bool Equals( VisaResourceNameParser other )
     {
-
         return (( VisaResourceNameBase ) this).Equals( ( VisaResourceNameParser ) other );
     }
 
