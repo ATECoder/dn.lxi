@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using cc.isr.MSTest.Exceptions;
+using cc.isr.Std.MSTest.Exceptions;
 
 	namespace cc.isr.LXI.MSTest;
 
@@ -61,6 +61,7 @@ public class VisaResourceNamesTests
     [TestInitialize()]
     public void InitializeBeforeEachTest()
     {
+        Console.WriteLine( $"{this.TestContext?.FullyQualifiedTestClassName}: {DateTime.Now} {System.TimeZoneInfo.Local}" );
         if ( Logger is not null )
         {
             this._loggerScope = Logger.BeginScope( this.TestContext?.TestName ?? string.Empty );

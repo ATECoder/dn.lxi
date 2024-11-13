@@ -9,10 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lxi", "lxi", "{86C043E0-788
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{4E793F65-6C68-43ED-8E2F-5C8BDD51A014}"
 	ProjectSection(SolutionItems) = preProject
-		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\changelog.md = ..\changelog.md
 		..\lxi.md = ..\lxi.md
 		items\readme.md = items\readme.md
-		..\README.md = ..\README.md
+		..\readme.md = ..\readme.md
 		items\version.build.bat = items\version.build.bat
 
 		items\version.build.props = items\version.build.props
@@ -26,9 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cc.isr.XDR.MSTest", "..\..\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{C9EC5D87-1B5B-42EB-BCB9-767B69A4DF9F}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\xdr\CHANGELOG.md = ..\..\xdr\CHANGELOG.md
+		..\..\xdr\changelog.md = ..\..\xdr\changelog.md
 		..\..\xdr\src\items\readme.md = ..\..\xdr\src\items\readme.md
-		..\..\xdr\README.md = ..\..\xdr\README.md
+		..\..\xdr\readme.md = ..\..\xdr\readme.md
 		..\..\xdr\src\items\version.build.bat = ..\..\xdr\src\items\version.build.bat
 		..\..\xdr\src\items\version.build.props = ..\..\xdr\src\items\version.build.props
 		..\..\xdr\xdr.md = ..\..\xdr\xdr.md
@@ -36,10 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{C9EC5D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{2201DCC6-F504-427C-8BC9-420202A5506C}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\oncrpc\CHANGELOG.md = ..\..\oncrpc\CHANGELOG.md
+		..\..\oncrpc\changelog.md = ..\..\oncrpc\changelog.md
 		..\..\oncrpc\onc.rpc.md = ..\..\oncrpc\onc.rpc.md
 		..\..\oncrpc\src\items\readme.md = ..\..\oncrpc\src\items\readme.md
-		..\..\oncrpc\README.md = ..\..\oncrpc\README.md
+		..\..\oncrpc\readme.md = ..\..\oncrpc\readme.md
 		..\..\oncrpc\src\items\version.build.bat = ..\..\oncrpc\src\items\version.build.bat
 		..\..\oncrpc\src\items\version.build.props = ..\..\oncrpc\src\items\version.build.props
 	EndProjectSection
@@ -52,9 +52,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vxi", "vxi", "{469FBA75-18C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "`build", "`build", "{9F383207-81EE-4C90-890C-76810B28F113}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\vxi\CHANGELOG.md = ..\..\vxi\CHANGELOG.md
+		..\..\vxi\changelog.md = ..\..\vxi\changelog.md
 		..\..\vxi\src\items\readme.md = ..\..\vxi\src\items\readme.md
-		..\..\vxi\README.md = ..\..\vxi\README.md
+		..\..\vxi\readme.md = ..\..\vxi\readme.md
 		..\..\vxi\src\items\version.build.bat = ..\..\vxi\src\items\version.build.bat
 		..\..\vxi\src\items\version.build.props = ..\..\vxi\src\items\version.build.props
 		..\..\vxi\vxi-11.md = ..\..\vxi\vxi-11.md
