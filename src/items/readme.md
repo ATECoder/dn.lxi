@@ -1,8 +1,8 @@
-### About
+# About
 
 [ISR's LXI] is a control and communication library for LXI-based instruments. 
 
-#### History
+## History
 
 [ISR's LXI] uses [ISR's VXI-11].
 
@@ -12,7 +12,7 @@
 
 [ISR's ONC RPC] uses [ISR's XDR], which is a C# implementation of the [XDR: External Data Representation Standard (May 2006)] as implemented in [Java ONC RPC] implementation called Remote Tea. [ISR's XDR] was split off from [GB1.RemoteTea.Net].
 
-#### Standards
+## Standards
 
 * [XDR: External Data Representation Standard (May 2006)]
 * Open Network Computing Remote Procedure Call (ONC RPC)
@@ -21,11 +21,11 @@
 * [VXI Bus Specification]
 * [LXI Specification]
 
-#### How to Use
+## How to Use
 
 For information on using [ISR's LXI] see the repository [ISR's LXI IEEE488] projects.
 
-#### Feedback
+## Feedback
 
 [ISR's LXI] is released as open source under the MIT license.
 Bug reports and contributions are welcome at the [ISR's LXI] repository.

@@ -1,4 +1,4 @@
-### LXI
+# LXI
 
 A control and communication library for LXI-based instruments. 
 
@@ -18,11 +18,11 @@ A control and communication library for LXI-based instruments.
 * [Repository Owner](#Repository-Owner)
 * [Security](security.md)
 
-#### Description
+## Description
 
 [ISR's LXI] is a partial C# implementation of the [LXI] Specification for instrument control and communication.
 
-#### History
+## History
 
 [ISR's LXI] uses [ISR's VXI-11].  
 
@@ -34,23 +34,23 @@ A control and communication library for LXI-based instruments.
 
 [ISR's ONC RPC] uses [ISR's XDR], which is a C# implementation of the [XDR: External Data Representation Standard (May 2006)] as implemented in [Java ONC RPC] implementation called Remote Tea. [ISR's XDR] was split off from [GB1.RemoteTea.Net].
 
-##### On the agenda
+### On the agenda
 Moving the IEEE488 implementations from [ISR's VXI-11] to [ISR's LXI]
 
-#### Issues
+## Issues
 
-#### Supported .NET Releases
+## Supported .NET Releases
 
 <a name="Repository-Owner"></a>
-#### Repository Owner
+## Repository Owner
 [ATE Coder]
 
 <a name="Authors"></a>
-#### Authors
+## Authors
 * [ATE Coder]  
 
 <a name="legal-notices"></a>
-#### Legal Notices
+## Legal Notices
 
 Integrated Scientific Resources, Inc., and any contributors grant you a license to the documentation and other content in this repository under the [Creative Commons Attribution 4.0 International Public License], see the [LICENSE](./LICENSE) file, and grant you a license to any code in the repository under the [MIT License], see the [LICENSE-CODE](./LICENSE-CODE) file.
 

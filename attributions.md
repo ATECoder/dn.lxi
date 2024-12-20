@@ -1,24 +1,24 @@
-### Attributions
+# Attributions
 
 * [Facilitated By](#Facilitated-By)
 * [Acknowledgments](#Acknowledgments)
 
-<a name="FacilitatedBy"></a>
-#### Facilitated By
+<a name="Facilitated-By"></a>
+## Facilitated By
 * [Visual Studio]
 * [Atomineer Code Documentation]
 * [EW Software Spell Checker]
 * [Funduc Search and Replace]
 * [IVI Foundation] - IVI Foundation VISA
 
-#### Repository Owner
+## Repository Owner
 * [ATE Coder]
 
 <a name="Authors"></a>
-#### Authors
+## Authors
 * [ATE Coder]  
 
-#### Acknowledgments
+## Acknowledgments
 * [Its all a remix] -- we are but a spec on the shoulders of giants  
 * [John Simmons] - outlaw programmer  
 * [Stack overflow] - Joel Spolsky  
