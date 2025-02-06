@@ -14,6 +14,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
   </ItemGroup>
 
+  <Import Project="..\lxi\version.build.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\lxi\cc.isr.LXI.csproj" />
   </ItemGroup>
