@@ -139,7 +139,7 @@ public abstract class VisaResourceNameBase : IEquatable<VisaResourceNameBase>
     public string DeviceName
     {
         get => this._deviceName;
-        
+
             {
              if ( !string.Equals( this.DeviceName, value, StringComparison.OrdinalIgnoreCase ) )
             {

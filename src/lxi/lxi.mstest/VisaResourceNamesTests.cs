@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using cc.isr.Std.MSTest.Exceptions;
 
-	namespace cc.isr.LXI.MSTest;
+    namespace cc.isr.LXI.MSTest;
 
 /// <summary>   (Unit Test Class) a visa resource names tests. </summary>
 /// <remarks>   2023-02-08. </remarks>
@@ -116,7 +116,7 @@ public class VisaResourceNamesTests
     }
 
     /// <summary>   (Unit Test Method) TCP/IP visa address should parse. </summary>
-    /// <remarks>   
+    /// <remarks>
     /// <code>
     /// Standard Output: 
     /// 2023-02-02 09:45:58.583,
@@ -255,7 +255,7 @@ public class VisaResourceNamesTests
     }
 
     /// <summary>   (Unit Test Method) TCP/IP instrument address should parse. </summary>
-    /// <remarks>  
+    /// <remarks>
     /// <code>
     /// Standard Output: 
     /// 2023-02-02 09:45:58.570,device is INST0 for TCPIP::10.0.0.1::INSTR
