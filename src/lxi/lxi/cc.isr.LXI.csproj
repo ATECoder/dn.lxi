@@ -7,13 +7,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
     <!-- Assembly Info -->
     <RootNamespace>cc.isr</RootNamespace>
     <AssemblyName>cc.isr.LXI</AssemblyName>
     <ApplicationTitle>cc.isr.LXI</ApplicationTitle>
     <ApplicationId>cc.isr.lxi</ApplicationId>
-
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
     <!-- Coding -->
     <OptionExplicit>On</OptionExplicit>
