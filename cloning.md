@@ -17,7 +17,7 @@ The repositories listed in [external repositories] are required:
 * [ISR'S LXI] - LXI.
 
 ```
-git clone git@bitbucket.org:davidhary/vs.ide.git
+git clone https://github.com/atecoder/vs.ide.git
 git clone https://github.com/ATECoder/dn.xdr.git
 git clone https://github.com/ATECoder/dn.onc.rpc.git
 git clone https://github.com/ATECoder/dn.vxi11.git
@@ -26,7 +26,7 @@ git clone https://github.com/ATECoder/dn.lxi.git
 
 Clone the repositories into the following folders (parents of the .git folder):
 ```
-%vslib%\core\ide
+%dnlib%\core\ide
 %dnlib%\iot\xdr
 %dnlib%\iot\oncrpc
 %dnlib%\iot\vxi
@@ -42,13 +42,13 @@ These files can be found in the [IDE Repository].
 Restoring Editor Configuration:
 ```
 xcopy /Y %my%\.editorconfig %my%\.editorconfig.bak
-xcopy /Y %vslib%\core\ide\code\.editorconfig %my%\.editorconfig
+xcopy /Y %dnlib%\core\ide\code\.editorconfig %my%\.editorconfig
 ```
 
 Restoring Runs Settings:
 ```
 xcopy /Y %userprofile%\.runsettings %userprofile%\.runsettings.bak
-xcopy /Y %vslib%\core\ide\code\.runsettings %userprofile%\.runsettings
+xcopy /Y %dnlib%\core\ide\code\.runsettings %userprofile%\.runsettings
 ```
 where %userprofile% is the root user folder.
 
